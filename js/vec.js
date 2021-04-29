@@ -15,6 +15,10 @@ export default class Vec {
     return `{ ${this.x.toFixed(0)}, ${this.y.toFixed(0)} }`;
   }
 
+  clone() {
+    return new Vec(this.x, this.y);
+  }
+
   dist(v) {
     return Math.sqrt(this.distSq(v));
   }
@@ -29,6 +33,8 @@ export default class Vec {
   add(x, y) {
     this.x += x;
     this.y += y;
+
+    return this;
   }
 
   addX(x) {

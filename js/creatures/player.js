@@ -56,7 +56,7 @@ export default class Player extends Creature {
         o.pos.distSq(this.pos) < this.range * this.range + this.size * o.size
     );
     if (!!o) {
-      Log(`${this.name}: ${s.attack.adverb()} ${s.attack.noun()} "${o.name}"`);
+      Log(`${this.name} ${s.attack.adverb()} ${s.attack.noun()} "${o.name}"`);
       this.cooldown = s.creature.cooldown;
     }
   }

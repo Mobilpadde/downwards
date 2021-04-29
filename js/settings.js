@@ -2,6 +2,15 @@ const map = {
   size: 512,
   biome: {
     grass: "#2ea043",
+    ground: "#41413f",
+  },
+  currentBiome: "grass",
+};
+
+const entity = {
+  "1x1": {
+    width: 16,
+    height: 16,
   },
 };
 
@@ -43,4 +52,4 @@ const attack = {
     ][~~(Math.random() * 12)],
 };
 
-export { map, creature, attack };
+export { map, creature, entity, attack };

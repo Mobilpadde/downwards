@@ -27,7 +27,7 @@ export default class Zombie extends Creature {
     if (p.invisible || this.cooldown > 0) return;
 
     if (p.pos.distSq(this.pos) < this.range * this.range + this.size * p.size) {
-      Log(`${this.name}: ${s.attack.adverb()} ${s.attack.noun()} "${p.name}"`);
+      Log(`${this.name} ${s.attack.adverb()} ${s.attack.noun()} "${p.name}"`);
       this.cooldown = s.creature.cooldown;
     }
   }
