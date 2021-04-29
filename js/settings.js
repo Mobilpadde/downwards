@@ -1,6 +1,8 @@
 const map = {
   size: 512,
-  sky: "#cce9f6",
+  biome: {
+    grass: "#2ea043",
+  },
 };
 
 const creature = {

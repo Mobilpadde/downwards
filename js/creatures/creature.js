@@ -42,6 +42,15 @@ export default class Creature {
       ctx.fill();
     }
 
+    ctx.fillStyle = `rgba(255, 150, 0, 0.2)`;
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.arc(this.pos.x, this.pos.y, this.size * 0.66, 0, Math.PI * 2, false);
+
+    ctx.fillStyle = `rgb(255, 255, 255)`;
+    ctx.fill();
+
     ctx.beginPath();
     ctx.arc(this.pos.x, this.pos.y, this.size / 2, 0, Math.PI * 2, false);
 

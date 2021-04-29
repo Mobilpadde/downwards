@@ -13,7 +13,7 @@ const zombies = new Array(3).fill(0).map(() => new Zombie());
 const player = new Player();
 
 const render = () => {
-  ctx.fillStyle = s.map.sky;
+  ctx.fillStyle = s.map.biome.grass;
   ctx.fillRect(0, 0, s.map.size, s.map.size);
 
   player.attack(zombies);
