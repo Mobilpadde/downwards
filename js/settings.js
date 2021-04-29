@@ -21,7 +21,7 @@ const attack = {
       "abused",
       "punched",
       "censured",
-      "berate",
+      "berated",
     ][~~(Math.random() * 9)],
 
   adverb: () =>
@@ -37,7 +37,8 @@ const attack = {
       "aggressively",
       "verbally",
       "suddenly",
-    ][~~(Math.random() * 11)],
+      "proudly",
+    ][~~(Math.random() * 12)],
 };
 
 export { map, creature, attack };

@@ -11,39 +11,60 @@ export default class Player extends Creature {
     this.invisible = false;
     this.keys = {
       KeyW: false,
-      KeyS: false,
-      KeyA: false,
-      KeyD: false,
       ArrowUp: false,
+
+      KeyS: false,
       ArrowDown: false,
+
+      KeyA: false,
       ArrowLeft: false,
+
+      KeyD: false,
       ArrowRight: false,
+
+      KeyZ: false,
       Space: false,
     };
 
+    this.range = s.creature.range;
+    this.cooldown = 0;
+    setInterval(() => this.cooldown--, 10);
     window.addEventListener("keyup", ({ code }) => (this.keys[code] = false));
     window.addEventListener("keydown", ({ code }) => (this.keys[code] = true));
 
     let logged = false;
     window.addEventListener("keyup", ({ code }) => {
-      if (code === "Space") {
-        Log(`${this.name}: invisible "${this.keys.Space.toString()}"`);
+      if (code === "KeyZ") {
+        Log(`${this.name}: invisible "${this.keys.KeyZ.toString()}"`);
         logged = false;
       }
     });
 
     window.addEventListener("keydown", ({ code }) => {
-      if (code === "Space" && !logged) {
+      if (code === "KeyZ" && !logged) {
         logged = true;
-        Log(`${this.name}: invisible "${this.keys.Space.toString()}"`);
+        Log(`${this.name}: invisible "${this.keys.KeyZ.toString()}"`);
       }
     });
   }
 
-  think() {
-    this.invisible = this.keys.Space;
+  attack(others) {
+    if (!this.keys.Space || this.cooldown > 0) return;
 
-    if (this.keys.Space) {
+    const o = others.find(
+      (o) =>
+        o.pos.distSq(this.pos) < this.range * this.range + this.size * o.size
+    );
+    if (!!o) {
+      Log(`${this.name}: ${s.attack.adverb()} ${s.attack.noun()} "${o.name}"`);
+      this.cooldown = s.creature.cooldown;
+    }
+  }
+
+  think() {
+    this.invisible = this.keys.KeyZ;
+
+    if (this.keys.KeyZ) {
       this.color = "rgba(45, 45, 45, 0.5)";
     } else {
       this.color = "rgba(45, 45, 45, 1)";

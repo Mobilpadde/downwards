@@ -16,6 +16,7 @@ const render = () => {
   ctx.fillStyle = s.map.sky;
   ctx.fillRect(0, 0, s.map.size, s.map.size);
 
+  player.attack(zombies);
   player.think();
   player.move();
   player.render(ctx);
