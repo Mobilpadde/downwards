@@ -13,7 +13,7 @@ const ctx = c.getContext("2d");
 let level = 0;
 
 let entities = new Array(2).fill(0).map(() => new Ladder());
-let zombies = new Array(3).fill(0).map(() => new Zombie());
+let zombies = [];
 const player = new Player();
 
 const render = () => {
@@ -23,7 +23,7 @@ const render = () => {
   entities.forEach((e) => {
     e.trigger(player, () => {
       entities = entities.map(() => new Ladder());
-      zombies = zombies.map(() => new Zombie());
+      zombies = new Array(level + 1).fill(0).map(() => new Zombie());
 
       const n = Object.keys(s.map.biome);
       s.map.currentBiome = n[~~(Math.random() * n.length)];
