@@ -8,8 +8,10 @@ export default class Zombie extends Creature {
   constructor() {
     super(s.creature.size, s.creature.vision, "teal", "z");
 
+    this.range = s.creature.range;
     this.speed = 0.25 + Math.random() * 0.55;
     this.move = new Vec(this.speed, 0);
+    this.cooldown = 0;
 
     this.dream = Vec.random(
       this.size,
@@ -17,6 +19,17 @@ export default class Zombie extends Creature {
       this.size,
       s.map.size - this.size
     );
+
+    setInterval(() => this.cooldown--, 10);
+  }
+
+  attack(p) {
+    if (p.invisible || this.cooldown > 0) return;
+
+    if (p.pos.distSq(this.pos) < this.range * this.range + this.size * p.size) {
+      Log(`${this.name}: ${s.attack.adverb()} ${s.attack.noun()} "${p.name}"`);
+      this.cooldown = s.creature.cooldown;
+    }
   }
 
   think(p) {

@@ -21,6 +21,7 @@ const render = () => {
   player.render(ctx);
 
   zombies.forEach((z) => {
+    z.attack(player);
     z.think(player);
     z.wander();
     z.render(ctx, true);

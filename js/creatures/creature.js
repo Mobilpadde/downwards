@@ -14,12 +14,6 @@ export default class Creature {
   }
 
   render(ctx, vision = false) {
-    ctx.beginPath();
-    ctx.arc(this.pos.x, this.pos.y, this.size / 2, 0, Math.PI * 2, false);
-
-    ctx.fillStyle = this.color;
-    ctx.fill();
-
     if (vision) {
       ctx.beginPath();
       ctx.arc(
@@ -33,6 +27,25 @@ export default class Creature {
 
       ctx.fillStyle = `rgba(255, 150, 0, 0.2)`;
       ctx.fill();
+
+      ctx.beginPath();
+      ctx.arc(
+        this.pos.x,
+        this.pos.y,
+        this.size / 2 + this.range,
+        0,
+        Math.PI * 2,
+        false
+      );
+
+      ctx.fillStyle = `rgba(0, 255, 255, 0.5)`;
+      ctx.fill();
     }
+
+    ctx.beginPath();
+    ctx.arc(this.pos.x, this.pos.y, this.size / 2, 0, Math.PI * 2, false);
+
+    ctx.fillStyle = this.color;
+    ctx.fill();
   }
 }

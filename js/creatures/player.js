@@ -1,6 +1,6 @@
-import Log from "../logger";
 import * as s from "../settings";
 
+import Log from "../logger";
 import Creature from "./creature";
 
 export default class Player extends Creature {
