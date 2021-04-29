@@ -47,3 +47,8 @@ canvas {
   color: white;
   padding: 1px 3px;
 }
+
+ul {
+  text-align: left;
+  list-style-type: none;
+}

@@ -1,4 +1,5 @@
 import * as s from "./settings";
+import Log from "./logger";
 
 import Zombie from "./creatures/zombie";
 import Player from "./creatures/player";
@@ -28,6 +29,8 @@ const render = () => {
       const n = Object.keys(s.map.biome);
       s.map.currentBiome = n[~~(Math.random() * n.length)];
       level++;
+
+      Log(`${player.name} entered Lv. ${level}`);
     });
 
     e.render(ctx);

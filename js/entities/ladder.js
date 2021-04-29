@@ -1,6 +1,5 @@
 import * as s from "../settings";
 import Vec from "../vec";
-import Log from "../logger";
 
 import Entity from "./entity";
 
