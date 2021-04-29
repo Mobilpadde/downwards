@@ -32,7 +32,7 @@ export default class Zombie extends Creature {
     }
   }
 
-  think(p) {
+  follow(p) {
     if (
       p.pos.distSq(this.pos) < this.vision * this.vision + this.size * p.size &&
       !p.invisible
@@ -52,10 +52,10 @@ export default class Zombie extends Creature {
       } else {
         this.move.y = 0;
       }
-
-      return;
     }
+  }
 
+  think() {
     if (this.dream.x < this.pos.x) {
       this.move.x = -this.speed;
     } else if (this.dream.x > this.pos.x) {
