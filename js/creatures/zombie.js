@@ -37,18 +37,20 @@ export default class Zombie extends Creature {
       p.pos.distSq(this.pos) < this.vision * this.vision + this.size * p.size &&
       !p.invisible
     ) {
+      const spd = this.speed;
+
       if (p.pos.x < this.pos.x) {
-        this.move.x = -this.speed;
+        this.move.x = -spd;
       } else if (p.pos.x > this.pos.x) {
-        this.move.x = this.speed;
+        this.move.x = spd;
       } else {
         this.move.x = 0;
       }
 
       if (p.pos.y < this.pos.y) {
-        this.move.y = -this.speed;
+        this.move.y = -spd;
       } else if (p.pos.y > this.pos.y) {
-        this.move.y = this.speed;
+        this.move.y = spd;
       } else {
         this.move.y = 0;
       }
@@ -56,18 +58,20 @@ export default class Zombie extends Creature {
   }
 
   think() {
+    const spd = this.speed / 2;
+
     if (this.dream.x < this.pos.x) {
-      this.move.x = -this.speed;
+      this.move.x = -spd;
     } else if (this.dream.x > this.pos.x) {
-      this.move.x = this.speed;
+      this.move.x = spd;
     } else {
       this.move.x = 0;
     }
 
     if (this.dream.y < this.pos.y) {
-      this.move.y = -this.speed;
+      this.move.y = -spd;
     } else if (this.dream.y > this.pos.y) {
-      this.move.y = this.speed;
+      this.move.y = spd;
     }
 
     if (this.dream.distSq(this.pos) < 10 * 10) {

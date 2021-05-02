@@ -64,7 +64,7 @@ const render = () => {
         .map((_, i) => new Ladder(1 - i));
 
       zombies = new Array(level).fill(0).map(() => new Zombie());
-      s.map.dither.size -= level * 10;
+      s.map.dither.size -= level * 5;
       s.map.dither.size = Math.max(s.map.dither.size, s.map.dither.minSize);
 
       const n = Object.keys(s.map.biome);
