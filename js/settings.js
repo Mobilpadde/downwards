@@ -5,6 +5,11 @@ const map = {
     ground: "#41413f",
   },
   currentBiome: "grass",
+
+  dither: {
+    size: 512,
+    minSize: 96,
+  },
 };
 
 const entity = {
