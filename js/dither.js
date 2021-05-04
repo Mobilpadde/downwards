@@ -1,5 +1,4 @@
 import Vec from "./vec";
-
 export default class Dither {
   static render(dat, range) {
     const newDat = new ImageData(dat.width, dat.height);

@@ -1,7 +1,10 @@
 # downwards
 
-Simply a game
+## Simply a game
 
+Sprites made using [goya](https://jackschaedler.github.io/goya/)
+
+![](./static/downward7.gif)
 ![](./static/downward6.gif)
 ![](./static/downward5.gif)
 ![](./static/downward4.gif)

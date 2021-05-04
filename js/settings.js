@@ -24,6 +24,11 @@ const creature = {
   vision: 32,
   range: 8,
   cooldown: 100,
+
+  sprite: {
+    size: 32,
+    resize: 24,
+  },
 };
 
 const attack = {

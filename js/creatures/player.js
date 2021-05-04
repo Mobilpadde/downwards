@@ -5,7 +5,13 @@ import Creature from "./creature";
 
 export default class Player extends Creature {
   constructor() {
-    super(s.creature.size, s.creature.vision, "rgba(45, 45, 45, 1)", "p");
+    super(
+      s.creature.size,
+      s.creature.vision,
+      "rgba(45, 45, 45, 1)",
+      "p",
+      "/static/person.png"
+    );
 
     this.speed = 1.25;
     this.invisible = false;
@@ -46,6 +52,8 @@ export default class Player extends Creature {
         Log(`${this.name}: invisible "${this.keys.KeyZ.toString()}"`);
       }
     });
+
+    this.updateInterval = null;
   }
 
   attack(others) {
@@ -86,6 +94,24 @@ export default class Player extends Creature {
 
     if (this.keys.KeyD || this.keys.ArrowRight) {
       this.pos.add(this.speed, 0);
+    }
+
+    if (
+      this.keys.KeyW ||
+      this.keys.ArrowUp ||
+      this.keys.KeyS ||
+      this.keys.ArrowDown ||
+      this.keys.KeyA ||
+      this.keys.ArrowLeft ||
+      this.keys.KeyD ||
+      this.keys.ArrowRight
+    ) {
+      if (this.updateInterval) return;
+
+      this.updateInterval = setInterval(() => this.updateSheet(), 150);
+    } else {
+      clearInterval(this.updateInterval);
+      this.updateInterval = null;
     }
   }
 }
