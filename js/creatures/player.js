@@ -108,6 +108,7 @@ export default class Player extends Creature {
     ) {
       if (this.updateInterval) return;
 
+      this.updateSheet();
       this.updateInterval = setInterval(() => this.updateSheet(), 150);
     } else {
       clearInterval(this.updateInterval);
