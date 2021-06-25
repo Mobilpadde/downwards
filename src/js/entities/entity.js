@@ -13,11 +13,10 @@ export default class Entity {
     this.name = `e${idx++}`;
   }
 
-  trigger(p) {
-    if (
-      p.pos.distSq(this.pos.clone().add(this.size.x / 2, this.size.y / 2)) <
-      this.size.x * this.size.y + p.size
-    ) {
+  trigger(p, dist) {
+    const a = this.pos.clone().add(this.size.x / 2, this.size.y / 2);
+
+    if (dist(p.pos.x, p.pos.y, a.x, a.y) < this.size.x * this.size.y + p.size) {
       Log(`${p.name} triggerd "${this.name}"`);
       return true;
     }

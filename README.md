@@ -1,5 +1,11 @@
 # downwards
 
+## Build
+
+`pnpm i`
+
+`pnpm build:all`
+
 ## Simply a game
 
 Sprites made using [goya](https://jackschaedler.github.io/goya/)

@@ -19,17 +19,6 @@ export default class Vec {
     return new Vec(this.x, this.y);
   }
 
-  dist(v) {
-    return Math.sqrt(this.distSq(v));
-  }
-
-  distSq(v) {
-    const dx = this.x - v.x;
-    const dy = this.y - v.y;
-
-    return dx * dx + dy * dy;
-  }
-
   add(x, y) {
     this.x += x;
     this.y += y;
