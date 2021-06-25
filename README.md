@@ -6,6 +6,8 @@
 
 `pnpm build:all`
 
+`pnpx serve build`
+
 ## Simply a game
 
 Sprites made using [goya](https://jackschaedler.github.io/goya/)
