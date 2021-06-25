@@ -23,19 +23,24 @@ export default class Zombie extends Creature {
     setInterval(() => this.cooldown--, 10);
   }
 
-  attack(p) {
+  attack(p, dist) {
     if (p.invisible || this.cooldown > 0) return;
 
-    if (p.pos.distSq(this.pos) < this.range * this.range + this.size * p.size) {
+    if (
+      dist(p.pos.x, p.pos.y, this.pos.x, this.pos.y) <
+      this.range * this.range + this.size * p.size
+    ) {
       Log(`${this.name} ${s.attack.adverb()} ${s.attack.noun()} "${p.name}"`);
       this.cooldown = s.creature.cooldown;
     }
   }
 
-  follow(p) {
+  follow(p, dist) {
+    if (p.invisible) return;
+
     if (
-      p.pos.distSq(this.pos) < this.vision * this.vision + this.size * p.size &&
-      !p.invisible
+      dist(p.pos.x, p.pos.y, this.pos.x, this.pos.y) <
+      this.vision * this.vision + this.size * p.size
     ) {
       const spd = this.speed;
 
@@ -57,7 +62,7 @@ export default class Zombie extends Creature {
     }
   }
 
-  think() {
+  think(dist) {
     const spd = this.speed / 2;
 
     if (this.dream.x < this.pos.x) {
@@ -74,7 +79,7 @@ export default class Zombie extends Creature {
       this.move.y = spd;
     }
 
-    if (this.dream.distSq(this.pos) < 10 * 10) {
+    if (dist(this.dream.x, this.dream.y, this.pos.x, this.pos.y) < 10 * 10) {
       this.dream = Vec.random(
         this.size,
         s.map.size - this.size,

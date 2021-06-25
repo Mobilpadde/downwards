@@ -56,12 +56,13 @@ export default class Player extends Creature {
     this.updateInterval = null;
   }
 
-  attack(others) {
+  attack(others, dist) {
     if (!this.keys.Space || this.cooldown > 0) return;
 
     const o = others.find(
       (o) =>
-        o.pos.distSq(this.pos) < this.range * this.range + this.size * o.size
+        dist(o.pos.x, o.pos.y, this.pos.x, this.pos.y) <
+        this.range * this.range + this.size * o.size
     );
     if (!!o) {
       Log(`${this.name} ${s.attack.adverb()} ${s.attack.noun()} "${o.name}"`);

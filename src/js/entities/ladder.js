@@ -13,7 +13,7 @@ export default class Ladder extends Entity {
     }
   }
 
-  trigger(p, fn) {
-    if (super.trigger(p)) fn();
+  trigger(p, fn, dist) {
+    if (super.trigger(p, dist)) fn();
   }
 }
