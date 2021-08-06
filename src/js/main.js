@@ -1,5 +1,4 @@
 import * as s from "./settings";
-import dither from "./dither";
 import Log from "./logger";
 
 import Renderer from "./renderer";
@@ -8,7 +7,7 @@ import Zombie from "./creatures/zombie";
 import Player from "./creatures/player";
 import Ladder from "./entities/ladder";
 
-import { exported } from "./loadWasm";
+import { getStuff } from "./loadWasm";
 
 const mainRenderer = new Renderer(s.map.size);
 const bgRenderer = new Renderer(s.map.size);
@@ -16,7 +15,8 @@ const bgRenderer = new Renderer(s.map.size);
 document.getElementById("c").prepend(mainRenderer.canvas);
 
 (async function () {
-  const { dist } = await exported();
+  const { dist, dither, __getUint8ClampedArrayView } = await getStuff();
+  console.log(await getStuff());
 
   let level = 0;
 
@@ -51,7 +51,10 @@ document.getElementById("c").prepend(mainRenderer.canvas);
       s.map.dither.size
     );
 
-    const dithered = dither.render(dat, dHalf, dist);
+    const dataPtr = dither(dat.width, dat.height, dHalf, dat.data);
+    const data = __getUint8ClampedArrayView(dataPtr);
+
+    const dithered = new ImageData(data, dat.width, dat.height);
 
     mainRenderer.ctx.clearRect(0, 0, s.map.size, s.map.size);
     mainRenderer.ctx.putImageData(
