@@ -40,6 +40,8 @@ const render = () => {
   })
 
   const dHalf = s.map.dither.size / 2
+  dither.square(bgRenderer.ctx, dHalf, player, s.map.dither.size)
+
   const dat = bgRenderer.ctx.getImageData(
     Math.min(player.pos.x - dHalf, player.pos.x),
     Math.min(player.pos.y - dHalf, player.pos.y),
