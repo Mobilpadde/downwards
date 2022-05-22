@@ -9,8 +9,8 @@ export default class Player extends Creature {
       s.creature.size,
       s.creature.vision,
       "rgba(45, 45, 45, 1)",
-      "p",
-      "/static/person.png"
+      "p"
+      // "/static/person.png"
     );
 
     this.speed = 1.25;

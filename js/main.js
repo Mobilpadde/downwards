@@ -1,93 +1,93 @@
-import * as s from './settings'
-import dither from './dither'
-import Log from './logger'
-import FPS from './fps'
+import * as s from "./settings";
+import dither from "./dither";
+import Log from "./logger";
+import FPS from "./fps";
 
-import Renderer from './renderer'
+import Renderer from "./renderer";
 
-import Zombie from './creatures/zombie'
-import Player from './creatures/player'
-import Ladder from './entities/ladder'
+import Zombie from "./creatures/zombie";
+import Player from "./creatures/player";
+import Ladder from "./entities/ladder";
 
-const mainRenderer = new Renderer(s.map.size)
-const bgRenderer = new Renderer(s.map.size)
+const mainRenderer = new Renderer(s.map.size);
+const bgRenderer = new Renderer(s.map.size);
 
-document.getElementById('c').prepend(mainRenderer.canvas)
+document.getElementById("c").prepend(mainRenderer.canvas);
 
-let level = 0
+let level = 0;
 
 let entities = new Array(~~(Math.random() * 3) + 1)
   .fill(0)
-  .map((_, i) => new Ladder(1 - i))
-let zombies = []
-const player = new Player()
+  .map((_, i) => new Ladder(1 - i));
+let zombies = [];
+const player = new Player();
 
 const render = () => {
-  bgRenderer.ctx.fillStyle = s.map.biome[s.map.currentBiome]
-  bgRenderer.ctx.fillRect(0, 0, s.map.size, s.map.size)
+  bgRenderer.ctx.fillStyle = s.map.biome[s.map.currentBiome];
+  bgRenderer.ctx.fillRect(0, 0, s.map.size, s.map.size);
 
-  player.attack(zombies)
-  player.think()
-  player.move()
-  player.render(bgRenderer.ctx)
+  player.attack(zombies);
+  player.think();
+  player.move();
+  player.render(bgRenderer.ctx);
 
   zombies.forEach((z) => {
-    z.attack(player)
-    z.think()
-    z.follow(player)
-    z.wander()
-    z.render(bgRenderer.ctx, true)
-  })
+    z.attack(player);
+    z.think();
+    z.follow(player);
+    z.wander();
+    z.render(bgRenderer.ctx, true);
+  });
 
-  const dHalf = s.map.dither.size / 2
-  dither.square(bgRenderer.ctx, dHalf, player, s.map.dither.size)
+  const dHalf = s.map.dither.size / 2;
+  dither.square(bgRenderer.ctx, dHalf, player, s.map.dither.size);
 
   const dat = bgRenderer.ctx.getImageData(
     Math.min(player.pos.x - dHalf, player.pos.x),
     Math.min(player.pos.y - dHalf, player.pos.y),
     s.map.dither.size,
-    s.map.dither.size,
-  )
+    s.map.dither.size
+  );
 
-  const dithered = dither.render(dat, dHalf)
+  const dithered = dither.render(dat, dHalf);
 
-  mainRenderer.ctx.clearRect(0, 0, s.map.size, s.map.size)
+  mainRenderer.ctx.clearRect(0, 0, s.map.size, s.map.size);
   mainRenderer.ctx.putImageData(
     dithered,
     player.pos.x - dHalf,
-    player.pos.y - dHalf,
-  )
+    player.pos.y - dHalf
+  );
 
   entities.forEach((e) => {
     e.trigger(player, () => {
-      level += e.level
+      level += e.level;
 
       entities = new Array(~~(Math.random() * 3) + 1)
         .fill(0)
-        .map((_, i) => new Ladder(1 - i))
+        .map((_, i) => new Ladder(1 - i));
 
-      zombies = new Array(level).fill(0).map(() => new Zombie())
-      s.map.dither.size -= level * 5
-      s.map.dither.size = Math.max(s.map.dither.size, s.map.dither.minSize)
+      zombies = new Array(level).fill(0).map(() => new Zombie());
+      s.map.dither.size -= level * 5;
+      s.map.dither.size = Math.max(s.map.dither.size, s.map.dither.minSize);
 
-      const n = Object.keys(s.map.biome)
-      s.map.currentBiome = n[~~(Math.random() * n.length)]
+      const n = Object.keys(s.map.biome);
+      s.map.currentBiome = n[~~(Math.random() * n.length)];
 
-      Log(`${player.name} entered Lv. ${level}`)
-    })
+      Log(`${player.name} entered Lv. ${level}`);
+    });
 
-    e.render(mainRenderer.ctx)
-  })
+    e.render(mainRenderer.ctx);
+  });
 
-  mainRenderer.ctx.fillStyle = `#fff`
-  mainRenderer.ctx.font = '12px monospace'
-  mainRenderer.ctx.textAlign = 'left'
-  mainRenderer.ctx.fillText(`${FPS()} FPS`, 5, s.map.size - 5)
+  mainRenderer.ctx.fillStyle = `#fff`;
+  mainRenderer.ctx.font = "12px monospace";
+  mainRenderer.ctx.textAlign = "left";
+  mainRenderer.ctx.fillText(`${FPS()} FPS`, 5, s.map.size - 5);
 
-  mainRenderer.ctx.textAlign = 'right'
-  mainRenderer.ctx.fillText(`Level: ${level}`, s.map.size - 5, s.map.size - 5)
+  mainRenderer.ctx.textAlign = "right";
+  mainRenderer.ctx.fillText(`Level: ${level}`, s.map.size - 5, s.map.size - 5);
 
-  window.requestAnimationFrame(render)
-}
+  window.requestAnimationFrame(render);
+};
 
-window.requestAnimationFrame(render)
+window.requestAnimationFrame(render);
