@@ -1,8 +1,9 @@
 const map = {
   size: 640,
   biome: {
-    grass: "#2ea043",
+    grass: "#048b67",
     ground: "#41413f",
+    stone: "#2b2d42",
   },
   currentBiome: "grass",
 
