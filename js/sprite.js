@@ -2,12 +2,12 @@ import * as s from "./settings";
 import Vec from "./vec";
 
 export default class Sprite {
-  constructor(sz, color, sheet) {
-    this.size = sz;
+  constructor({ size, color, sheet }) {
+    this.size = size;
     this.color = color;
     this.sheet = sheet;
 
-    this.pos = Vec.random(sz, s.map.size - sz, sz, s.map.size - sz);
+    this.pos = Vec.random(size, s.map.size - size, size, s.map.size - size);
 
     if (!!sheet) {
       this.sheetIdx = 0;

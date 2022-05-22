@@ -5,13 +5,15 @@ import Creature from "./creature";
 
 export default class Player extends Creature {
   constructor() {
-    super(
-      s.creature.size,
-      s.creature.vision,
-      "rgba(45, 45, 45, 1)",
-      "p"
-      // "/static/person.png"
-    );
+    super({
+      health: s.creature.health,
+      damage: s.creature.damage,
+      size: s.creature.size,
+      vision: s.creature.vision,
+      color: "rgba(45, 45, 45, 1)",
+      id: "p",
+      // sheet: "/static/person.png"
+    });
 
     this.speed = 1.25;
     this.invisible = false;
@@ -34,6 +36,7 @@ export default class Player extends Creature {
     this.range = s.creature.range;
     this.cooldown = 0;
     setInterval(() => this.cooldown--, 10);
+
     window.addEventListener("keyup", ({ code }) => (this.keys[code] = false));
     window.addEventListener("keydown", ({ code }) => (this.keys[code] = true));
 
@@ -56,19 +59,23 @@ export default class Player extends Creature {
   }
 
   attack(others) {
-    if (this.cooldown > 0) return; // !this.keys.Space ||
+    if (this.cooldown > 0 && !this.dead) return; // !this.keys.Space ||
 
     const o = others.find(
       (o) =>
+        !o.dead &&
         o.pos.distSq(this.pos) < this.range * this.range + this.size * o.size
     );
     if (!!o) {
       Log(`${this.name} ${s.attack.adverb()} ${s.attack.noun()} "${o.name}"`);
       this.cooldown = s.creature.cooldown;
+      o.takeDamage(this.damage, this.name);
     }
   }
 
   think() {
+    if (this.dead) return;
+
     this.invisible = this.keys.Space;
 
     if (this.keys.Space) {
@@ -113,5 +120,15 @@ export default class Player extends Creature {
       clearInterval(this.updateInterval);
       this.updateInterval = null;
     }
+  }
+
+  update(zombies, ctx) {
+    if (!this.dead) {
+      this.attack(zombies);
+      this.think();
+      this.move();
+    }
+
+    this.render(ctx);
   }
 }

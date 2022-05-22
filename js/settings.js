@@ -23,6 +23,9 @@ const creature = {
   size: 8,
   vision: 32,
   range: 8,
+
+  health: 100,
+  damage: 10,
   cooldown: 100,
 
   sprite: {

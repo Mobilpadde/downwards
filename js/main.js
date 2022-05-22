@@ -1,8 +1,10 @@
 import * as s from "./settings";
-import dither from "./dither";
+import Events from "./events";
+
 import Log from "./logger";
 import FPS from "./fps";
 
+import dither from "./dither";
 import Renderer from "./renderer";
 
 import Zombie from "./creatures/zombie";
@@ -14,30 +16,14 @@ const bgRenderer = new Renderer(s.map.size);
 
 document.getElementById("c").prepend(mainRenderer.canvas);
 
-let level = 0;
-
-let entities = new Array(~~(Math.random() * 3) + 1)
-  .fill(0)
-  .map((_, i) => new Ladder(1 - i));
-let zombies = [];
-const player = new Player();
-
 const render = () => {
   bgRenderer.ctx.fillStyle = s.map.biome[s.map.currentBiome];
   bgRenderer.ctx.fillRect(0, 0, s.map.size, s.map.size);
 
-  player.attack(zombies);
-  player.think();
-  player.move();
-  player.render(bgRenderer.ctx);
-
-  zombies.forEach((z) => {
-    z.attack(player);
-    z.think();
-    z.follow(player);
-    z.wander();
-    z.render(bgRenderer.ctx, true);
-  });
+  player.update(zombies, bgRenderer.ctx);
+  zombies.forEach((z) =>
+    z.update(player, bgRenderer.ctx, false && import.meta.env.DEV)
+  );
 
   const dHalf = s.map.dither.size / 2;
   dither.square(bgRenderer.ctx, dHalf, player, s.map.dither.size);
@@ -90,4 +76,39 @@ const render = () => {
   window.requestAnimationFrame(render);
 };
 
-window.requestAnimationFrame(render);
+let level = import.meta.env.DEV ? 1 : 0;
+let player;
+let entities;
+let zombies;
+
+const init = () => {
+  level = import.meta.env.DEV ? 1 : 0;
+
+  player = new Player();
+  entities = new Array(~~(Math.random() * 3) + 1)
+    .fill(0)
+    .map((_, i) => new Ladder(1 - i));
+  zombies = new Array(level).fill(0).map(() => new Zombie());
+
+  s.map.currentBiome = "grass";
+
+  Events.on(`${player.name}-dead`, init);
+  window.requestAnimationFrame(render);
+};
+window.addEventListener("load", init);
+
+Events.on(`creature-dead`, (name) => {
+  if (name === player.name) {
+    Events.emit(`${player.name}-dead`);
+    return;
+  }
+
+  zombies.forEach(({ name }) => {
+    if (name === name) {
+      setTimeout(
+        () => (zombies = zombies.filter(({ name }) => name !== name)),
+        5000
+      );
+    }
+  });
+});

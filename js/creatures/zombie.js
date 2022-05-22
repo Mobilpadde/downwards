@@ -6,7 +6,14 @@ import Creature from "./creature";
 
 export default class Zombie extends Creature {
   constructor() {
-    super(s.creature.size, s.creature.vision, "teal", "z");
+    super({
+      health: s.creature.health,
+      damage: s.creature.damage,
+      size: s.creature.size,
+      vision: s.creature.vision,
+      color: "teal",
+      id: "z",
+    });
 
     this.range = s.creature.range;
     this.speed = 0.25 + Math.random() * 0.55;
@@ -24,18 +31,23 @@ export default class Zombie extends Creature {
   }
 
   attack(p) {
-    if (p.invisible || this.cooldown > 0) return;
+    if (p.invisible || (this.cooldown > 0 && !this.dead)) return;
 
-    if (p.pos.distSq(this.pos) < this.range * this.range + this.size * p.size) {
+    if (
+      !p.dead &&
+      p.pos.distSq(this.pos) < this.range * this.range + this.size * p.size
+    ) {
       Log(`${this.name} ${s.attack.adverb()} ${s.attack.noun()} "${p.name}"`);
       this.cooldown = s.creature.cooldown;
+      p.takeDamage(this.damage, this.name);
     }
   }
 
   follow(p) {
     if (
-      p.pos.distSq(this.pos) < this.vision * this.vision + this.size * p.size &&
-      !p.invisible
+      !p.dead &&
+      !p.invisible &&
+      p.pos.distSq(this.pos) < this.vision * this.vision + this.size * p.size
     ) {
       const spd = this.speed;
 
@@ -58,6 +70,8 @@ export default class Zombie extends Creature {
   }
 
   think() {
+    if (this.dead) return;
+
     const spd = this.speed / 2;
 
     if (this.dream.x < this.pos.x) {
@@ -86,5 +100,16 @@ export default class Zombie extends Creature {
 
   wander() {
     this.pos.add(this.move.x, this.move.y);
+  }
+
+  update(player, ctx, vision) {
+    if (!this.dead) {
+      this.attack(player);
+      this.think();
+      this.follow(player);
+      this.wander();
+    }
+
+    this.render(ctx, vision);
   }
 }
