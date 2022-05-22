@@ -7,7 +7,7 @@ export default class Creature extends Sprite {
     super(sz, color, sheet);
     this.vision = vision;
 
-    this.name = `${id}${idx++}`;
+    this.name = `${id}${++idx}`;
   }
 
   render(ctx, vision = false) {
