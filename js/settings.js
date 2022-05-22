@@ -1,5 +1,5 @@
 const map = {
-  size: 512,
+  size: 640,
   biome: {
     grass: "#2ea043",
     ground: "#41413f",
