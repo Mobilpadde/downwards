@@ -73,15 +73,18 @@ const render = () => {
   mainRenderer.ctx.textAlign = "right";
   mainRenderer.ctx.fillText(`Level: ${level}`, s.map.size - 5, s.map.size - 5);
 
-  window.requestAnimationFrame(render);
+  raf = window.requestAnimationFrame(render);
 };
 
 let level = import.meta.env.DEV ? 1 : 0;
 let player;
 let entities;
 let zombies;
+let raf = null;
 
 const init = () => {
+  if (!!raf) window.cancelAnimationFrame(raf);
+
   level = import.meta.env.DEV ? 1 : 0;
 
   player = new Player();
@@ -91,9 +94,10 @@ const init = () => {
   zombies = new Array(level).fill(0).map(() => new Zombie());
 
   s.map.currentBiome = "grass";
+  s.map.dither.size = 512;
 
   Events.on(`${player.name}-dead`, init);
-  window.requestAnimationFrame(render);
+  raf = window.requestAnimationFrame(render);
 };
 window.addEventListener("load", init);
 
