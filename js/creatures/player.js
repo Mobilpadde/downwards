@@ -28,7 +28,6 @@ export default class Player extends Creature {
       KeyD: false,
       ArrowRight: false,
 
-      KeyZ: false,
       Space: false,
     };
 
@@ -40,16 +39,16 @@ export default class Player extends Creature {
 
     let logged = false;
     window.addEventListener("keyup", ({ code }) => {
-      if (code === "KeyZ") {
-        Log(`${this.name}: invisible "${this.keys.KeyZ.toString()}"`);
+      if (code === "Space") {
+        Log(`${this.name}: invisible "${this.keys.Space.toString()}"`);
         logged = false;
       }
     });
 
     window.addEventListener("keydown", ({ code }) => {
-      if (code === "KeyZ" && !logged) {
+      if (code === "Space" && !logged) {
         logged = true;
-        Log(`${this.name}: invisible "${this.keys.KeyZ.toString()}"`);
+        Log(`${this.name}: invisible "${this.keys.Space.toString()}"`);
       }
     });
 
@@ -57,7 +56,7 @@ export default class Player extends Creature {
   }
 
   attack(others) {
-    if (!this.keys.Space || this.cooldown > 0) return;
+    if (this.cooldown > 0) return; // !this.keys.Space ||
 
     const o = others.find(
       (o) =>
@@ -70,9 +69,9 @@ export default class Player extends Creature {
   }
 
   think() {
-    this.invisible = this.keys.KeyZ;
+    this.invisible = this.keys.Space;
 
-    if (this.keys.KeyZ) {
+    if (this.keys.Space) {
       this.color = "rgba(45, 45, 45, 0.5)";
     } else {
       this.color = "rgba(45, 45, 45, 1)";
