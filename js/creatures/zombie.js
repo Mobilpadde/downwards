@@ -102,6 +102,24 @@ export default class Zombie extends Creature {
     this.pos.add(this.move.x, this.move.y);
   }
 
+  render(ctx) {
+    ctx.beginPath();
+    ctx.arc(
+      this.pos.x,
+      this.pos.y,
+      this.size * 0.99,
+      0,
+      Math.PI * (this.health.current / this.health.max) * 2,
+      false
+    );
+
+    ctx.strokeStyle = `hsla(120deg, 75%, 50%, 0.6)`;
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    super.render(ctx);
+  }
+
   update(player, ctx, vision) {
     if (!this.dead) {
       this.attack(player);

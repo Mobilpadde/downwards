@@ -122,6 +122,24 @@ export default class Player extends Creature {
     }
   }
 
+  render(ctx) {
+    ctx.beginPath();
+    ctx.arc(
+      this.pos.x,
+      this.pos.y,
+      this.size * 1.33,
+      0,
+      Math.PI * (this.health.current / this.health.max) * 2,
+      false
+    );
+
+    ctx.strokeStyle = `hsla(120deg, 75%, 50%, 0.6)`;
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    super.render(ctx);
+  }
+
   update(zombies, ctx) {
     if (!this.dead) {
       this.attack(zombies);

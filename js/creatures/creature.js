@@ -60,20 +60,6 @@ export default class Creature extends Sprite {
 
     // if (!!!this.sheet) {
     ctx.beginPath();
-    ctx.arc(
-      this.pos.x,
-      this.pos.y,
-      this.size * 0.99,
-      0,
-      Math.PI * (this.health.current / this.health.max) * 2,
-      false
-    );
-
-    ctx.strokeStyle = `hsla(120deg, 75%, 50%, 0.6)`;
-    ctx.lineWidth = 2;
-    ctx.stroke();
-
-    ctx.beginPath();
     ctx.arc(this.pos.x, this.pos.y, this.size * 0.66, 0, Math.PI * 2, false);
 
     ctx.fillStyle = `rgb(255, 255, 255)`;
