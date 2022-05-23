@@ -71,7 +71,6 @@ export default class Player extends Creature {
       this.invisibilityInterval = setTimeout(() => {
         this.invisible = false;
         this.takeDamage(sInvisibility.costs);
-        console.log(sInvisibility);
         Log(`${this.name} is visible`, playerInvisible.toggled);
       }, sInvisibility.time);
     }
