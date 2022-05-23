@@ -41,8 +41,6 @@ export default class Player extends Creature {
     };
 
     this.range = sCreature.creature.range;
-    this.cooldown = 0;
-    setInterval(() => this.cooldown--, 10);
 
     window.addEventListener("keyup", this.keyUp.bind(this));
     window.addEventListener("keydown", this.keyDown.bind(this));
