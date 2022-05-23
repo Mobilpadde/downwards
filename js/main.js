@@ -26,6 +26,13 @@ const bgRenderer = new Renderer(s.map.size);
 
 document.getElementById("c").prepend(mainRenderer.canvas);
 
+if (mainRenderer.canvas.clientWidth > window.innerWidth) {
+  mainRenderer.canvas.style.width = `100%`;
+}
+if (mainRenderer.canvas.clientHeight > window.innerHeight) {
+  mainRenderer.canvas.style.height = `300px`;
+}
+
 const render = (time) => {
   bgRenderer.ctx.fillStyle = s.map.biome[s.map.currentBiome];
   bgRenderer.ctx.fillRect(0, 0, s.map.size, s.map.size);

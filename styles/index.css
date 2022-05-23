@@ -108,36 +108,42 @@ ul {
 
   border-radius: 50%;
   background: rgba(137, 88, 54, 0.8);
-  width: 75px;
-  height: 75px;
+  width: 100px;
+  height: 100px;
 }
 
 #controls .btn {
-  width: 25px;
-  height: 25px;
+  width: 50px;
+  height: 50px;
 
   position: absolute;
-  line-height: 25px;
+  line-height: 50px;
+
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 #controls #w.btn {
   left: 25px;
-  bottom: 50px;
+  bottom: 65px;
 }
 
 #controls #a.btn {
-  left: 0;
-  bottom: 25px;
+  left: -5px;
+  bottom: 30px;
 }
 
 #controls #d.btn {
-  left: 50px;
-  bottom: 25px;
+  left: 55px;
+  bottom: 30px;
 }
 
 #controls #s.btn {
   left: 25px;
-  bottom: 0;
+  bottom: -5px;
 }
 
 #controls #space.btn {
@@ -147,9 +153,29 @@ ul {
 
   left: 664px;
   bottom: 0;
+
+  display: none;
 }
 
 @media (max-height: 700px) {
+  #sidebar {
+    max-height: 300px;
+    height: 300px;
+  }
+
+  #filtering {
+    display: none;
+  }
+
+  #console {
+    width: 192px;
+    height: 100%;
+  }
+
+  #console > li > span {
+    display: none;
+  }
+
   #information {
     display: none;
   }
