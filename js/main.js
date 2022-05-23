@@ -86,10 +86,10 @@ let raf = null;
 const init = () => {
   if (!!raf) window.cancelAnimationFrame(raf);
 
-  level = import.meta.env.DEV ? 15 : 0;
+  level = import.meta.env.DEV ? 10 : 0;
 
   player = new Player();
-  entities = new Array(~~(Math.random() * 3) + 1)
+  entities = new Array(~~(Math.random() * (level > 0 ? 3 : 1)) + 1)
     .fill(0)
     .map((_, i) => new Ladder(1 - i));
   zombies = new Array(level).fill(0).map(() => new Zombie());
