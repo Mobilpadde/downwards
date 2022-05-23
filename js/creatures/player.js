@@ -16,7 +16,7 @@ export default class Player extends Creature {
       // sheet: "/static/person.png"
     });
 
-    this.weapons = new Array(4)
+    this.weapons = new Array(1)
       .fill(0)
       .map(() => new Fist({ pos: this.pos, size: this.size }));
 
