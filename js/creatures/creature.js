@@ -1,6 +1,7 @@
 import Events from "../events";
 import Sprite from "../sprite";
 import Log from "../logger";
+import { death } from "../settings/filters";
 
 let idx = 0;
 
@@ -80,7 +81,7 @@ export default class Creature extends Sprite {
 
     if (this.health.current <= 0) {
       this.dead = true;
-      Log(`${dealer} has killed "${this.name}"`);
+      Log(`${dealer} has killed "${this.name}"`, death.toggled);
       Events.emit("creature-dead", this.name);
     }
   }

@@ -1,4 +1,5 @@
 import * as s from "./settings";
+import makeFilters, { levelChange } from "./settings/filters";
 import Events from "./events";
 
 import Log from "./logger";
@@ -10,6 +11,8 @@ import Renderer from "./renderer";
 import Zombie from "./creatures/zombie";
 import Player from "./creatures/player";
 import Ladder from "./entities/ladder";
+
+makeFilters();
 
 const mainRenderer = new Renderer(s.map.size);
 const bgRenderer = new Renderer(s.map.size);
@@ -60,7 +63,7 @@ const render = () => {
       s.map.currentBiome = n[~~(Math.random() * n.length)];
 
       player.addWeapon();
-      Log(`${player.name} entered Lv. ${level}`);
+      Log(`${player.name} entered Lv. ${level}`, levelChange.toggled);
     });
 
     e.render(mainRenderer.ctx);

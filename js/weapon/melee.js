@@ -1,6 +1,5 @@
 import * as s from "../settings";
 import Weapon from "./weapon";
-import Log from "../logger";
 
 export default class Melee extends Weapon {
   constructor(o) {
@@ -23,11 +22,14 @@ export default class Melee extends Weapon {
       this.dream = pos.clone().add(x, y);
     }
 
-    if (this.cooldown > 0) return;
+    if (this.cooldown > 0) return false;
     if (o) {
-      Log(`${this.name} ${s.attack.adverb()} ${s.attack.noun()} "${o.name}"`);
       this.cooldown = s.weapons.melee.cooldown;
       o.takeDamage(this.damage, this.name);
+
+      return o;
     }
+
+    return false;
   }
 }

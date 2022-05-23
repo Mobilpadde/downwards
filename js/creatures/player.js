@@ -1,4 +1,5 @@
 import * as s from "../settings";
+import { playerInvisible, weaponAdd, weaponRemove } from "../settings/filters";
 
 import Log from "../logger";
 import Creature from "./creature";
@@ -48,7 +49,10 @@ export default class Player extends Creature {
     let logged = false;
     window.addEventListener("keyup", ({ code }) => {
       if (code === "Space") {
-        Log(`${this.name}: invisible "${this.keys.Space.toString()}"`);
+        Log(
+          `${this.name}: invisible "${this.keys.Space.toString()}"`,
+          playerInvisible.toggled
+        );
         logged = false;
       }
     });
@@ -56,7 +60,10 @@ export default class Player extends Creature {
     window.addEventListener("keydown", ({ code }) => {
       if (code === "Space" && !logged) {
         logged = true;
-        Log(`${this.name}: invisible "${this.keys.Space.toString()}"`);
+        Log(
+          `${this.name}: invisible "${this.keys.Space.toString()}"`,
+          playerInvisible.toggled
+        );
       }
     });
 
@@ -65,7 +72,10 @@ export default class Player extends Creature {
 
   addWeapon() {
     if (this.weapons.length >= s.player.weapons) {
-      Log(`"${this.weapons[0].name}" was removed from you`);
+      Log(
+        `"${this.weapons[0].name}" was removed from you`,
+        weaponRemove.toggled
+      );
       this.weapons.shift();
     }
 
@@ -73,7 +83,10 @@ export default class Player extends Creature {
       new Fist({ pos: this.pos, size: this.size, idx: this.weapons.length })
     );
     this.weapons.forEach((w, i) => w.updatePos(i));
-    Log(`"${this.weapons[this.weapons.length - 1].name}" was added to you`);
+    Log(
+      `"${this.weapons[this.weapons.length - 1].name}" was added to you`,
+      weaponAdd.toggled
+    );
   }
 
   attack(others) {

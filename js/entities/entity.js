@@ -1,6 +1,5 @@
 import { map } from "../settings";
 import Vec from "../vec";
-import Log from "../logger";
 
 let idx = 0;
 
@@ -18,7 +17,6 @@ export default class Entity {
       p.pos.distSq(this.pos.clone().add(this.size.x / 2, this.size.y / 2)) <
       this.size.x * this.size.y + p.size
     ) {
-      Log(`${p.name} triggerd "${this.name}"`);
       return true;
     }
 

@@ -1,4 +1,5 @@
 import * as s from "../settings";
+import { attackZombie } from "../settings/filters";
 
 import Log from "../logger";
 import Vec from "../vec";
@@ -37,7 +38,10 @@ export default class Zombie extends Creature {
       !p.dead &&
       p.pos.distSq(this.pos) < this.range * this.range + this.size * p.size
     ) {
-      Log(`${this.name} ${s.attack.adverb()} ${s.attack.noun()} "${p.name}"`);
+      Log(
+        `${this.name} ${s.attack.adverb()} ${s.attack.noun()} "${p.name}"`,
+        attackZombie.toggled
+      );
       this.cooldown = s.creature.cooldown;
       p.takeDamage(this.damage, this.name);
     }

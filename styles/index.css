@@ -28,13 +28,46 @@ canvas {
   image-rendering: crisp-edges;
 }
 
+#sidebar {
+  width: 300px;
+  max-height: 640px;
+  display: flex;
+  flex-direction: column;
+}
+
+#filtering {
+  height: 20%;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+  padding: 4px;
+}
+
+#filtering b {
+  margin-bottom: 2px;
+  display: block;
+}
+
+#filters {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: col;
+  justify-content: space-between;
+}
+
+.filter {
+  padding: 4px 2px;
+}
+
+.filter input {
+  margin-left: 6px;
+}
+
 #console {
   font-size: 11px;
   font-family: Menlo, Consolas, "Lucida Console", "dejavu sans" mono, monospace;
   margin: 0px auto;
   padding: 4px;
-  width: 300px;
-  max-height: 640px;
+  width: 292px;
+  height: 80%;
   overflow-y: scroll;
   text-align: left;
   border-left: 1px solid rgba(255, 255, 255, 0.5);
