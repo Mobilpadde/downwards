@@ -8,8 +8,17 @@ const weapon = {
 
 const melee = {
   ...weapon,
-  speed: 1.75,
   cooldown: 75,
+};
+
+const fist = {
+  ...melee,
+  speed: 1.75,
+};
+
+const sword = {
+  ...melee,
+  speed: 1.5,
   damage: 7,
 };
 
@@ -18,9 +27,15 @@ const ranged = {
   range: 96,
 };
 
-const weapons = {
-  melee,
-  ranged,
+const pistol = {
+  ...ranged,
+  range: 102,
+  damage: 6,
 };
 
-export { weapons };
+const smg = {
+  ...ranged,
+  damage: 7,
+};
+
+export { melee, fist, sword, ranged, pistol, smg };

@@ -4,10 +4,14 @@ import { sInvisibility } from "../settings/invisibility";
 
 import Log from "../utils/logger";
 import Creature from "./creature";
-import Fist from "../weapon/fist";
-import Pistol from "../weapon/pistol";
 
-const weapons = [Fist, Pistol];
+import Fist from "../weapon/fist";
+import Sword from "../weapon/sword";
+
+import Pistol from "../weapon/pistol";
+import Smg from "../weapon/smg";
+
+const weapons = [Fist, Sword, Pistol, Smg];
 
 export default class Player extends Creature {
   constructor() {

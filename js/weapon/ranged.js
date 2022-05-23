@@ -4,7 +4,7 @@ import Weapon from "./weapon";
 export default class Ranged extends Weapon {
   constructor(o) {
     super({
-      ...sWeapon.weapons.ranged,
+      ...sWeapon.ranged,
       ...o,
     });
   }
@@ -24,7 +24,7 @@ export default class Ranged extends Weapon {
 
     if (this.cooldown > 0) return false;
     if (o) {
-      this.cooldown = sWeapon.weapons.melee.cooldown;
+      this.cooldown = sWeapon.melee.cooldown;
       o.takeDamage(this.damage, this.name);
 
       return o;
