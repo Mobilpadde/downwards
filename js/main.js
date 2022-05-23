@@ -12,6 +12,13 @@ import Zombie from "./creatures/zombie";
 import Player from "./creatures/player";
 import Ladder from "./entities/ladder";
 
+[
+  "WASD or Arrows to move",
+  "Space to turn invisible",
+  "- costs 3hp for 500ms",
+  "Attacks are automatic",
+  "",
+].forEach((t) => Log(t, true));
 makeFilters();
 
 const mainRenderer = new Renderer(s.map.size);
