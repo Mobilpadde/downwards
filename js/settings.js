@@ -35,6 +35,36 @@ const creature = {
   },
 };
 
+const player = {
+  ...creature,
+  health: 50,
+  weapons: 4,
+};
+
+const weapon = {
+  size: 8,
+  range: 32,
+  speed: 1,
+  cooldown: 100,
+  damage: 5,
+};
+
+const melee = {
+  ...weapon,
+  speed: 1.1,
+  cooldown: 50,
+};
+
+const ranged = {
+  ...weapon,
+  range: 64,
+};
+
+const weapons = {
+  melee,
+  ranged,
+};
+
 const attack = {
   noun: () =>
     [
@@ -66,4 +96,4 @@ const attack = {
     ][~~(Math.random() * 12)],
 };
 
-export { map, creature, entity, attack };
+export { map, creature, player, entity, attack, weapons };

@@ -2,6 +2,7 @@ import * as s from "../settings";
 
 import Log from "../logger";
 import Creature from "./creature";
+import Fist from "../weapon/fist";
 
 export default class Player extends Creature {
   constructor() {
@@ -14,6 +15,10 @@ export default class Player extends Creature {
       id: "p",
       // sheet: "/static/person.png"
     });
+
+    this.weapons = new Array(4)
+      .fill(0)
+      .map(() => new Fist({ pos: this.pos, size: this.size }));
 
     this.speed = 1.25;
     this.invisible = false;
@@ -58,19 +63,17 @@ export default class Player extends Creature {
     this.updateInterval = null;
   }
 
-  attack(others) {
-    if (this.cooldown > 0 && !this.dead) return; // !this.keys.Space ||
-
-    const o = others.find(
-      (o) =>
-        !o.dead &&
-        o.pos.distSq(this.pos) < this.range * this.range + this.size * o.size
-    );
-    if (!!o) {
-      Log(`${this.name} ${s.attack.adverb()} ${s.attack.noun()} "${o.name}"`);
-      this.cooldown = s.creature.cooldown;
-      o.takeDamage(this.damage, this.name);
+  addWeapon() {
+    if (this.weapons.length >= s.player.weapons) {
+      this.weapons.shift();
     }
+
+    this.weapons.push(new Fist({ pos: this.pos, size: this.size }));
+  }
+
+  attack(others) {
+    if (this.dead) return;
+    this.weapons.forEach((w) => w.attack(others, this.pos.clone(), this.size));
   }
 
   think() {
@@ -138,6 +141,8 @@ export default class Player extends Creature {
     ctx.stroke();
 
     super.render(ctx);
+
+    this.weapons.forEach((w) => w.render(ctx));
   }
 
   update(zombies, ctx) {
@@ -145,6 +150,8 @@ export default class Player extends Creature {
       this.attack(zombies);
       this.think();
       this.move();
+
+      this.weapons.forEach((w) => w.update(this.speed));
     }
 
     this.render(ctx);

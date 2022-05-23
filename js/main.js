@@ -59,6 +59,7 @@ const render = () => {
       const n = Object.keys(s.map.biome);
       s.map.currentBiome = n[~~(Math.random() * n.length)];
 
+      player.addWeapon();
       Log(`${player.name} entered Lv. ${level}`);
     });
 
@@ -76,7 +77,7 @@ const render = () => {
   raf = window.requestAnimationFrame(render);
 };
 
-let level = import.meta.env.DEV ? 1 : 0;
+let level;
 let player;
 let entities;
 let zombies;
@@ -85,7 +86,7 @@ let raf = null;
 const init = () => {
   if (!!raf) window.cancelAnimationFrame(raf);
 
-  level = import.meta.env.DEV ? 1 : 0;
+  level = import.meta.env.DEV ? 15 : 0;
 
   player = new Player();
   entities = new Array(~~(Math.random() * 3) + 1)
