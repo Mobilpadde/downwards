@@ -107,13 +107,4 @@ Events.on(`creature-dead`, (name) => {
     Events.emit(`${player.name}-dead`);
     return;
   }
-
-  zombies.forEach(({ name }) => {
-    if (name === name) {
-      setTimeout(
-        () => (zombies = zombies.filter(({ name }) => name !== name)),
-        5000
-      );
-    }
-  });
 });
