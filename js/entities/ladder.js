@@ -1,4 +1,4 @@
-import * as s from "../settings/settings";
+import * as s from "../settings/map";
 import Vec from "../utils/vec";
 
 import Entity from "./entity";
