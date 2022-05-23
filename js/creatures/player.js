@@ -18,7 +18,7 @@ export default class Player extends Creature {
 
     this.weapons = new Array(1)
       .fill(0)
-      .map(() => new Fist({ pos: this.pos, size: this.size }));
+      .map((_, idx) => new Fist({ pos: this.pos, size: this.size, idx }));
 
     this.speed = 1.25;
     this.invisible = false;
@@ -68,7 +68,10 @@ export default class Player extends Creature {
       this.weapons.shift();
     }
 
-    this.weapons.push(new Fist({ pos: this.pos, size: this.size }));
+    this.weapons.push(
+      new Fist({ pos: this.pos, size: this.size, idx: this.weapons.length })
+    );
+    this.weapons.forEach((w, i) => w.updatePos(i));
   }
 
   attack(others) {

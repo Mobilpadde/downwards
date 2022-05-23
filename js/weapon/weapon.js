@@ -3,7 +3,17 @@ import Vec from "../vec";
 let idx = 0;
 
 export default class Weapon {
-  constructor({ range, id, cooldown, damage, color, pos, size, speed }) {
+  constructor({
+    range,
+    id,
+    cooldown,
+    damage,
+    color,
+    pos,
+    size,
+    speed,
+    idx: index,
+  }) {
     this.color = color;
     this.range = range;
     this.size = size;
@@ -13,19 +23,20 @@ export default class Weapon {
     this.pos = pos.clone();
     this.move = new Vec();
 
-    if (this.id % 4 == 0)
-      this.posAddition = new Vec(-(this.size + size) * 1.25, 0);
-    else if (this.id % 3 == 0)
-      this.posAddition = new Vec(0, (this.size + size) * 1.25);
-    else if (this.id % 2 == 0)
-      this.posAddition = new Vec((this.size + size) * 1.25, 0);
-    else this.posAddition = new Vec(0, -(this.size + size) * 1.25);
-
     this.name = `${id}${this.id}`;
 
     this.damage = damage;
     this.cooldown = cooldown;
     setInterval(() => this.cooldown--, 10);
+
+    this.updatePos(index);
+  }
+
+  updatePos(idx) {
+    if (idx % 4 == 0) this.posAddition = new Vec(-(this.size * 2) * 1.25, 0);
+    else if (idx % 3 == 0) this.posAddition = new Vec(0, this.size * 2 * 1.25);
+    else if (idx % 2 == 0) this.posAddition = new Vec(this.size * 2 * 1.25, 0);
+    else this.posAddition = new Vec(0, -(this.size * 2) * 1.25);
   }
 
   update(speed) {
