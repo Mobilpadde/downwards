@@ -22,8 +22,8 @@ const entity = {
 
 const creature = {
   size: 8,
-  vision: 32,
-  range: 8,
+  vision: 72,
+  range: 16,
 
   health: 100,
   damage: 10,
@@ -43,7 +43,7 @@ const player = {
 
 const weapon = {
   size: 8,
-  range: 32,
+  range: 64,
   speed: 1.25,
   cooldown: 100,
   damage: 5,
@@ -57,7 +57,7 @@ const melee = {
 
 const ranged = {
   ...weapon,
-  range: 64,
+  range: 80,
 };
 
 const weapons = {
