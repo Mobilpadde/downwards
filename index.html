@@ -2,29 +2,47 @@
 <html>
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Downwards!</title>
     <link rel="stylesheet" href="./styles/index.css" />
-    <script defer data-domain="downwards.vercel.app" src="https://plausible.madco.me/js/plausible.js"></script>
+    <script
+      defer
+      data-domain="downwards.vercel.app"
+      src="https://plausible.madco.me/js/plausible.js"
+    ></script>
   </head>
   <body>
     <div id="c">
       <div id="sidebar">
         <div id="filtering">
           <b>Filtering</b>
-          <div id="filters">
-          </div>
+          <div id="filters"></div>
         </div>
         <ul id="console"></ul>
       </div>
     </div>
-    <p>
+    <div id="controls">
+      <div id="w" class="btn">W</div>
+      <div id="a" class="btn">A</div>
+      <div id="d" class="btn">D</div>
+      <div id="s" class="btn">S</div>
+      <div id="space" class="btn">Space</div>
+    </div>
+    <div id="information">
       Controls:
       <ul>
-        <li><i>Space</i> to turn invisible - costs <b>3 hp</b> for <b>500 ms</b></li>
-        <!-- <li><i>Space</i> to attack</li> -->
-        <li><i>W</i> | <i>A</i> | <i>S</i> | <i>D</i> | <i>Arrows</i> to move around</li>
+        <li>
+          <i>W</i> | <i>A</i> | <i>S</i> | <i>D</i> | <i>Arrows</i> to
+          <b>move</b> around
+        </li>
+        <br />
+        <li>
+          <i>Space</i> to turn invisible - costs <b>3 hp</b> for <b>500 ms</b>
+        </li>
+        <br />
+        <li><i>Attacks</i> are <b>automatic</b></li>
       </ul>
-    </p>
+    </div>
     <script type="module" src="./js/main.js"></script>
   </body>
 </html>

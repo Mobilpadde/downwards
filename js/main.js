@@ -3,7 +3,7 @@ import makeFilters, { levelChange } from "./settings/filters";
 import Events from "./utils/events";
 
 import Log from "./utils/logger";
-import FPS from "./utils/fps";
+// import FPS from "./utils/fps";
 
 import dither from "./rendering/dither";
 import Renderer from "./rendering/renderer";
@@ -12,6 +12,13 @@ import Zombie from "./creatures/zombie";
 import Player from "./creatures/player";
 import Ladder from "./entities/ladder";
 
+[
+  "WASD or Arrows to move",
+  "Space to turn invisible",
+  "- costs 3hp for 500ms",
+  "Attacks are automatic",
+  "",
+].forEach((t) => Log(t, true));
 makeFilters();
 
 const mainRenderer = new Renderer(s.map.size);
@@ -73,8 +80,8 @@ const render = (time) => {
 
   mainRenderer.ctx.fillStyle = `#fff`;
   mainRenderer.ctx.font = "12px monospace";
-  mainRenderer.ctx.textAlign = "left";
-  mainRenderer.ctx.fillText(`${FPS(time)} FPS`, 5, s.map.size - 5);
+  // mainRenderer.ctx.textAlign = "left";
+  // mainRenderer.ctx.fillText(`${FPS(time)} FPS`, 5, s.map.size - 5);
 
   mainRenderer.ctx.textAlign = "right";
   mainRenderer.ctx.fillText(`Level: ${level}`, s.map.size - 5, s.map.size - 5);

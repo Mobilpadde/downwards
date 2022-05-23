@@ -12,6 +12,9 @@ body {
   display: grid;
   justify-content: center;
   align-content: center;
+  margin: 0;
+  padding: 0;
+  position: relative;
 }
 
 #c {
@@ -30,7 +33,7 @@ canvas {
 
 #sidebar {
   width: 300px;
-  max-height: 640px;
+  max-height: 480px;
   display: flex;
   flex-direction: column;
 }
@@ -89,4 +92,73 @@ canvas {
 ul {
   text-align: left;
   list-style-type: none;
+}
+
+#information {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px;
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+#controls {
+  display: none;
+
+  border-radius: 50%;
+  background: rgba(137, 88, 54, 0.8);
+  width: 75px;
+  height: 75px;
+}
+
+#controls .btn {
+  width: 25px;
+  height: 25px;
+
+  position: absolute;
+  line-height: 25px;
+}
+
+#controls #w.btn {
+  left: 25px;
+  bottom: 50px;
+}
+
+#controls #a.btn {
+  left: 0;
+  bottom: 25px;
+}
+
+#controls #d.btn {
+  left: 50px;
+  bottom: 25px;
+}
+
+#controls #s.btn {
+  left: 25px;
+  bottom: 0;
+}
+
+#controls #space.btn {
+  width: 100px;
+  background: rgba(137, 88, 54, 0.8);
+  border-radius: 4px;
+
+  left: 664px;
+  bottom: 0;
+}
+
+@media (max-height: 700px) {
+  #information {
+    display: none;
+  }
+
+  #controls {
+    display: block;
+
+    position: fixed;
+    left: 16px;
+    bottom: 16px;
+  }
 }

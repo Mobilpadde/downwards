@@ -47,6 +47,38 @@ export default class Player extends Creature {
     window.addEventListener("keyup", this.keyUp.bind(this));
     window.addEventListener("keydown", this.keyDown.bind(this));
 
+    const controlW = document.getElementById("w");
+    controlW.addEventListener("touchend", () => this.keyUp({ code: "KeyW" }));
+    controlW.addEventListener("touchstart", () =>
+      this.keyDown({ code: "KeyW" })
+    );
+
+    const controlA = document.getElementById("a");
+    controlA.addEventListener("touchend", () => this.keyUp({ code: "KeyA" }));
+    controlA.addEventListener("touchstart", () =>
+      this.keyDown({ code: "KeyA" })
+    );
+
+    const controlS = document.getElementById("s");
+    controlS.addEventListener("touchend", () => this.keyUp({ code: "KeyS" }));
+    controlS.addEventListener("touchstart", () =>
+      this.keyDown({ code: "KeyS" })
+    );
+
+    const controlD = document.getElementById("d");
+    controlD.addEventListener("touchend", () => this.keyUp({ code: "KeyD" }));
+    controlD.addEventListener("touchstart", () =>
+      this.keyDown({ code: "KeyD" })
+    );
+
+    const controlSpace = document.getElementById("space");
+    controlSpace.addEventListener("touchstart", () =>
+      this.keyDown({ code: "Space" })
+    );
+    controlSpace.addEventListener("touchendaw", () =>
+      this.keyUp({ code: "Space" })
+    );
+
     this.invisibilityInterval = null;
     this.updateInterval = null;
   }

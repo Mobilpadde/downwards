@@ -1,5 +1,5 @@
 const map = {
-  size: 640,
+  size: 480,
   biome: {
     grass: "#048b67",
     ground: "#41413f",
@@ -8,7 +8,7 @@ const map = {
   currentBiome: "grass",
 
   dither: {
-    size: 512,
+    size: 320,
     minSize: 168,
   },
 };
