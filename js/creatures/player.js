@@ -5,6 +5,9 @@ import { sInvisibility } from "../settings/invisibility";
 import Log from "../utils/logger";
 import Creature from "./creature";
 import Fist from "../weapon/fist";
+import Pistol from "../weapon/pistol";
+
+const weapons = [Fist, Pistol];
 
 export default class Player extends Creature {
   constructor() {
@@ -17,10 +20,6 @@ export default class Player extends Creature {
       id: "p",
       // sheet: "/static/person.png"
     });
-
-    this.weapons = new Array(1)
-      .fill(0)
-      .map((_, idx) => new Fist({ pos: this.pos, size: this.size, idx }));
 
     this.speed = 1.25;
     this.invisible = false;
@@ -47,6 +46,9 @@ export default class Player extends Creature {
 
     this.invisibilityInterval = null;
     this.updateInterval = null;
+
+    this.weapons = [];
+    this.addWeapon();
   }
 
   keyUp({ code }) {
@@ -101,7 +103,11 @@ export default class Player extends Creature {
     }
 
     this.weapons.push(
-      new Fist({ pos: this.pos, size: this.size, idx: this.weapons.length })
+      new weapons[~~(Math.random() * weapons.length)]({
+        pos: this.pos,
+        size: this.size,
+        idx: this.weapons.length,
+      })
     );
     this.weapons.forEach((w, i) => w.updatePos(i));
     Log(

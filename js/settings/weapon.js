@@ -14,7 +14,7 @@ const melee = {
 
 const ranged = {
   ...weapon,
-  range: 80,
+  range: 96,
 };
 
 const weapons = {

@@ -16,6 +16,12 @@ const attackFist = {
   toggled: localStorage.getItem("downwards:attackFist") == "true" || true,
 };
 
+const attackPistol = {
+  tag: "attackPistol",
+  text: "Attack: Pistol",
+  toggled: localStorage.getItem("downwards:attackPistol") == "true" || true,
+};
+
 const levelChange = {
   tag: "levelChange",
   text: "Level change",
@@ -51,11 +57,16 @@ export default () => {
 
   [
     death,
+
     attackZombie,
     attackFist,
+    attackPistol,
+
     levelChange,
     levelChangeRegen,
+
     playerInvisible,
+
     weaponAdd,
     weaponRemove,
   ].forEach((t) => {
@@ -92,6 +103,7 @@ export {
   death,
   attackZombie,
   attackFist,
+  attackPistol,
   levelChange,
   levelChangeRegen,
   playerInvisible,

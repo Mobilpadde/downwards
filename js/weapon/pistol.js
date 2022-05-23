@@ -1,15 +1,15 @@
-import Melee from "./melee";
+import Ranged from "./ranged";
 import * as sAttack from "../settings/attack";
-import { attackFist } from "../settings/filters";
+import { attackPistol } from "../settings/filters";
 import Log from "../utils/logger";
 
-export default class Fist extends Melee {
+export default class Pistol extends Ranged {
   constructor({ pos, idx }) {
     super({
       pos,
       idx,
-      id: "fist",
-      color: "#b5838d",
+      id: "pistol",
+      color: "#ff006e",
     });
   }
 
@@ -20,7 +20,7 @@ export default class Fist extends Melee {
         `${this.name} ${sAttack.attack.adverb()} ${sAttack.attack.noun()} "${
           o.name
         }"`,
-        attackFist.toggled
+        attackPistol.toggled
       );
     }
   }
