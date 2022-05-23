@@ -44,14 +44,14 @@ const player = {
 const weapon = {
   size: 8,
   range: 32,
-  speed: 1,
+  speed: 1.25,
   cooldown: 100,
   damage: 5,
 };
 
 const melee = {
   ...weapon,
-  speed: 1.1,
+  speed: 1.75,
   cooldown: 50,
 };
 
