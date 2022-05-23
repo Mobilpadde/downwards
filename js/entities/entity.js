@@ -1,4 +1,4 @@
-import { map } from "../settings/settings";
+import { map } from "../settings/map";
 import Vec from "../utils/vec";
 
 let idx = 0;

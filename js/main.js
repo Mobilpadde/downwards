@@ -1,4 +1,4 @@
-import * as s from "./settings/settings";
+import * as sMap from "./settings/map";
 import makeFilters, { levelChange } from "./settings/filters";
 import Events from "./utils/events";
 
@@ -21,14 +21,14 @@ import Ladder from "./entities/ladder";
 ].forEach((t) => Log(t, true));
 makeFilters();
 
-const mainRenderer = new Renderer(s.map.size);
-const bgRenderer = new Renderer(s.map.size);
+const mainRenderer = new Renderer(sMap.map.size);
+const bgRenderer = new Renderer(sMap.map.size);
 
 document.getElementById("c").prepend(mainRenderer.canvas);
 
 const render = (time) => {
-  bgRenderer.ctx.fillStyle = s.map.biome[s.map.currentBiome];
-  bgRenderer.ctx.fillRect(0, 0, s.map.size, s.map.size);
+  bgRenderer.ctx.fillStyle = sMap.map.biome[map.currentBiome];
+  bgRenderer.ctx.fillRect(0, 0, sMap.map.size, sMap.map.size);
 
   player.update(zombies, bgRenderer.ctx);
   zombies.forEach((z) =>
@@ -36,19 +36,19 @@ const render = (time) => {
   );
   player.weapons.forEach((w) => w.render(bgRenderer.ctx));
 
-  const dHalf = s.map.dither.size / 2;
-  dither.square(bgRenderer.ctx, dHalf, player, s.map.dither.size);
+  const dHalf = map.dither.size / 2;
+  dither.square(bgRenderer.ctx, dHalf, player, map.dither.size);
 
   const dat = bgRenderer.ctx.getImageData(
     Math.min(player.pos.x - dHalf, player.pos.x),
     Math.min(player.pos.y - dHalf, player.pos.y),
-    s.map.dither.size,
-    s.map.dither.size
+    map.dither.size,
+    map.dither.size
   );
 
   const dithered = dither.render(dat, dHalf);
 
-  mainRenderer.ctx.clearRect(0, 0, s.map.size, s.map.size);
+  mainRenderer.ctx.clearRect(0, 0, sMap.map.size, sMap.map.size);
   mainRenderer.ctx.putImageData(
     dithered,
     player.pos.x - dHalf,
@@ -64,11 +64,11 @@ const render = (time) => {
         .map((_, i) => new Ladder(1 - i));
 
       zombies = new Array(level).fill(0).map(() => new Zombie());
-      s.map.dither.size -= level * 2;
-      s.map.dither.size = Math.max(s.map.dither.size, s.map.dither.minSize);
+      map.dither.size -= level * 2;
+      map.dither.size = Math.max(map.dither.size, sMap.map.dither.minSize);
 
-      const n = Object.keys(s.map.biome);
-      s.map.currentBiome = n[~~(Math.random() * n.length)];
+      const n = Object.keys(sMap.map.biome);
+      map.currentBiome = n[~~(Math.random() * n.length)];
 
       player.addWeapon();
       player.levelRegen();
@@ -81,10 +81,14 @@ const render = (time) => {
   mainRenderer.ctx.fillStyle = `#fff`;
   mainRenderer.ctx.font = "12px monospace";
   mainRenderer.ctx.textAlign = "left";
-  mainRenderer.ctx.fillText(`${FPS(time)} FPS`, 5, s.map.size - 5);
+  mainRenderer.ctx.fillText(`${FPS(time)} FPS`, 5, sMap.map.size - 5);
 
   mainRenderer.ctx.textAlign = "right";
-  mainRenderer.ctx.fillText(`Level: ${level}`, s.map.size - 5, s.map.size - 5);
+  mainRenderer.ctx.fillText(
+    `Level: ${level}`,
+    sMap.map.size - 5,
+    sMap.map.size - 5
+  );
 
   raf = window.requestAnimationFrame(render);
 };
@@ -93,11 +97,12 @@ let level;
 let player;
 let entities;
 let zombies;
-let raf = null;
+let raf;
+let map;
 
 const init = () => {
   if (!!raf) window.cancelAnimationFrame(raf);
-
+  map = { ...sMap.map };
   level = import.meta.env.DEV ? 10 : 0;
 
   if (player) player.destroy();
@@ -106,9 +111,6 @@ const init = () => {
     .fill(0)
     .map((_, i) => new Ladder(1 - i));
   zombies = new Array(level).fill(0).map(() => new Zombie());
-
-  s.map.currentBiome = "grass";
-  s.map.dither.size = 512;
 
   Events.on(`${player.name}-dead`, init);
   raf = window.requestAnimationFrame(render);

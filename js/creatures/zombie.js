@@ -1,4 +1,5 @@
 import * as s from "../settings/settings";
+import * as sMap from "../settings/map";
 import { attackZombie } from "../settings/filters";
 
 import Log from "../utils/logger";
@@ -23,9 +24,9 @@ export default class Zombie extends Creature {
 
     this.dream = Vec.random(
       this.size,
-      s.map.size - this.size,
+      sMap.map.size - this.size,
       this.size,
-      s.map.size - this.size
+      sMap.map.size - this.size
     );
 
     setInterval(() => this.cooldown--, 10);
@@ -95,9 +96,9 @@ export default class Zombie extends Creature {
     if (this.dream.distSq(this.pos) < 10 * 10) {
       this.dream = Vec.random(
         this.size,
-        s.map.size - this.size,
+        sMap.map.size - this.size,
         this.size,
-        s.map.size - this.size
+        sMap.map.size - this.size
       );
     }
   }

@@ -1,4 +1,5 @@
 import * as s from "../settings/settings";
+import * as sMap from "../settings/map";
 import Vec from "../utils/vec";
 
 export default class Sprite {
@@ -7,7 +8,12 @@ export default class Sprite {
     this.color = color;
     this.sheet = sheet;
 
-    this.pos = Vec.random(size, s.map.size - size, size, s.map.size - size);
+    this.pos = Vec.random(
+      size,
+      sMap.map.size - size,
+      size,
+      sMap.map.size - size
+    );
 
     if (!!sheet) {
       this.sheetIdx = 0;
