@@ -1,8 +1,8 @@
-import * as s from "../settings";
+import * as s from "../settings/settings";
 import { attackZombie } from "../settings/filters";
 
-import Log from "../logger";
-import Vec from "../vec";
+import Log from "../utils/logger";
+import Vec from "../utils/vec";
 import Creature from "./creature";
 
 export default class Zombie extends Creature {

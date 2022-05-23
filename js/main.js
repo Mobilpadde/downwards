@@ -1,12 +1,12 @@
-import * as s from "./settings";
+import * as s from "./settings/settings";
 import makeFilters, { levelChange } from "./settings/filters";
-import Events from "./events";
+import Events from "./utils/events";
 
-import Log from "./logger";
-import FPS from "./fps";
+import Log from "./utils/logger";
+import FPS from "./utils/fps";
 
-import dither from "./dither";
-import Renderer from "./renderer";
+import dither from "./rendering/dither";
+import Renderer from "./rendering/renderer";
 
 import Zombie from "./creatures/zombie";
 import Player from "./creatures/player";
@@ -19,7 +19,7 @@ const bgRenderer = new Renderer(s.map.size);
 
 document.getElementById("c").prepend(mainRenderer.canvas);
 
-const render = () => {
+const render = (time) => {
   bgRenderer.ctx.fillStyle = s.map.biome[s.map.currentBiome];
   bgRenderer.ctx.fillRect(0, 0, s.map.size, s.map.size);
 
@@ -57,7 +57,7 @@ const render = () => {
         .map((_, i) => new Ladder(1 - i));
 
       zombies = new Array(level).fill(0).map(() => new Zombie());
-      s.map.dither.size -= level * 5;
+      s.map.dither.size -= level * 2;
       s.map.dither.size = Math.max(s.map.dither.size, s.map.dither.minSize);
 
       const n = Object.keys(s.map.biome);
@@ -74,7 +74,7 @@ const render = () => {
   mainRenderer.ctx.fillStyle = `#fff`;
   mainRenderer.ctx.font = "12px monospace";
   mainRenderer.ctx.textAlign = "left";
-  mainRenderer.ctx.fillText(`${FPS()} FPS`, 5, s.map.size - 5);
+  mainRenderer.ctx.fillText(`${FPS(time)} FPS`, 5, s.map.size - 5);
 
   mainRenderer.ctx.textAlign = "right";
   mainRenderer.ctx.fillText(`Level: ${level}`, s.map.size - 5, s.map.size - 5);

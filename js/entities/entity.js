@@ -1,5 +1,5 @@
-import { map } from "../settings";
-import Vec from "../vec";
+import { map } from "../settings/settings";
+import Vec from "../utils/vec";
 
 let idx = 0;
 

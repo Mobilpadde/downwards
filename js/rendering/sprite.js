@@ -1,5 +1,5 @@
-import * as s from "./settings";
-import Vec from "./vec";
+import * as s from "../settings/settings";
+import Vec from "../utils/vec";
 
 export default class Sprite {
   constructor({ size, color, sheet }) {

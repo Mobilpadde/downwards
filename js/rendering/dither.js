@@ -1,4 +1,4 @@
-import Vec from "./vec";
+import Vec from "../utils/vec";
 
 export default class Dither {
   static render(dat, range) {

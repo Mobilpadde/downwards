@@ -1,7 +1,7 @@
 import Melee from "./melee";
-import * as s from "../settings";
+import * as s from "../settings/settings";
 import { attackFist } from "../settings/filters";
-import Log from "../logger";
+import Log from "../utils/logger";
 
 export default class Fist extends Melee {
   constructor({ pos, idx }) {

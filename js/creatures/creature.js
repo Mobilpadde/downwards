@@ -1,6 +1,6 @@
-import Events from "../events";
-import Sprite from "../sprite";
-import Log from "../logger";
+import Events from "../utils/events";
+import Sprite from "../rendering/sprite";
+import Log from "../utils/logger";
 import { death } from "../settings/filters";
 
 let idx = 0;

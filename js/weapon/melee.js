@@ -1,4 +1,4 @@
-import * as s from "../settings";
+import * as s from "../settings/settings";
 import Weapon from "./weapon";
 
 export default class Melee extends Weapon {

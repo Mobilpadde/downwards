@@ -9,7 +9,7 @@ const map = {
 
   dither: {
     size: 512,
-    minSize: 96,
+    minSize: 168,
   },
 };
 

@@ -1,4 +1,4 @@
-import Vec from "../vec";
+import Vec from "../utils/vec";
 
 let idx = 0;
 

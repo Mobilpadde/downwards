@@ -1,7 +1,7 @@
-import * as s from "../settings";
+import * as s from "../settings/settings";
 import { playerInvisible, weaponAdd, weaponRemove } from "../settings/filters";
 
-import Log from "../logger";
+import Log from "../utils/logger";
 import Creature from "./creature";
 import Fist from "../weapon/fist";
 
