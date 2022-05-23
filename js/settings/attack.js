@@ -1,32 +1,33 @@
-const attack = {
-  noun: () =>
-    [
-      "attacked",
-      "slashed",
-      "charged",
-      "strafed",
-      "striked",
-      "abused",
-      "punched",
-      "censured",
-      "berated",
-    ][~~(Math.random() * 9)],
+const nouns = [
+  "attacked",
+  "slashed",
+  "charged",
+  "strafed",
+  "striked",
+  "abused",
+  "punched",
+  "censured",
+  "berated",
+];
 
-  adverb: () =>
-    [
-      "boldly",
-      "actually",
-      "physically",
-      "mentally",
-      "violently",
-      "vigorously",
-      "generally",
-      "rarely",
-      "aggressively",
-      "verbally",
-      "suddenly",
-      "proudly",
-    ][~~(Math.random() * 12)],
+const adverbs = [
+  "boldly",
+  "actually",
+  "physically",
+  "mentally",
+  "violently",
+  "vigorously",
+  "generally",
+  "rarely",
+  "aggressively",
+  "verbally",
+  "suddenly",
+  "proudly",
+];
+
+const attack = {
+  noun: () => nouns[~~(Math.random() * nouns.length)],
+  adverb: () => adverbs[~~(Math.random() * adverbs.length)],
 };
 
 export { attack };
