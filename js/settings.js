@@ -39,6 +39,7 @@ const player = {
   ...creature,
   health: 50,
   weapons: 4,
+  levelRegen: 5,
 };
 
 const weapon = {
@@ -52,7 +53,7 @@ const weapon = {
 const melee = {
   ...weapon,
   speed: 1.75,
-  cooldown: 50,
+  cooldown: 75,
 };
 
 const ranged = {

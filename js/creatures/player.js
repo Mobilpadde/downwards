@@ -8,10 +8,10 @@ import Fist from "../weapon/fist";
 export default class Player extends Creature {
   constructor() {
     super({
-      health: s.creature.health,
-      damage: s.creature.damage,
-      size: s.creature.size,
-      vision: s.creature.vision,
+      health: s.player.health,
+      damage: s.player.damage,
+      size: s.player.size,
+      vision: s.player.vision,
       color: "rgba(45, 45, 45, 1)",
       id: "p",
       // sheet: "/static/person.png"
@@ -68,6 +68,18 @@ export default class Player extends Creature {
     });
 
     this.updateInterval = null;
+  }
+
+  levelRegen() {
+    this.health.current += s.player.levelRegen;
+
+    if (this.health.current > this.health.max)
+      this.health.current = this.health.max;
+
+    Log(
+      `${this.name} has ${this.health.current} health`,
+      playerInvisible.toggled
+    );
   }
 
   addWeapon() {

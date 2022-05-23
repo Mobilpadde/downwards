@@ -22,6 +22,12 @@ const levelChange = {
   toggled: localStorage.getItem("downwards:levelChange") == "true" || true,
 };
 
+const levelChangeRegen = {
+  tag: "levelChangeRegen",
+  text: "Regen",
+  toggled: localStorage.getItem("downwards:levelChangeRegen") == "true" || true,
+};
+
 const playerInvisible = {
   tag: "playerInvisible",
   text: "Invisibility",
@@ -48,6 +54,7 @@ export default () => {
     attackZombie,
     attackFist,
     levelChange,
+    levelChangeRegen,
     playerInvisible,
     weaponAdd,
     weaponRemove,
@@ -86,6 +93,7 @@ export {
   attackZombie,
   attackFist,
   levelChange,
+  levelChangeRegen,
   playerInvisible,
   weaponAdd,
   weaponRemove,

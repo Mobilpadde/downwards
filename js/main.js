@@ -63,6 +63,7 @@ const render = () => {
       s.map.currentBiome = n[~~(Math.random() * n.length)];
 
       player.addWeapon();
+      player.levelRegen();
       Log(`${player.name} entered Lv. ${level}`, levelChange.toggled);
     });
 
@@ -89,7 +90,7 @@ let raf = null;
 const init = () => {
   if (!!raf) window.cancelAnimationFrame(raf);
 
-  level = import.meta.env.DEV ? 10 : 0;
+  level = import.meta.env.DEV ? 1 : 0;
 
   player = new Player();
   entities = new Array(~~(Math.random() * (level > 0 ? 3 : 1)) + 1)
