@@ -90,7 +90,7 @@ let raf = null;
 const init = () => {
   if (!!raf) window.cancelAnimationFrame(raf);
 
-  level = import.meta.env.DEV ? 1 : 0;
+  level = import.meta.env.DEV ? 10 : 0;
 
   player = new Player();
   entities = new Array(~~(Math.random() * (level > 0 ? 3 : 1)) + 1)
