@@ -27,6 +27,7 @@ const render = () => {
   zombies.forEach((z) =>
     z.update(player, bgRenderer.ctx, false && import.meta.env.DEV)
   );
+  player.weapons.forEach((w) => w.render(bgRenderer.ctx));
 
   const dHalf = s.map.dither.size / 2;
   dither.square(bgRenderer.ctx, dHalf, player, s.map.dither.size);

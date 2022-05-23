@@ -196,8 +196,6 @@ export default class Player extends Creature {
     ctx.stroke();
 
     super.render(ctx);
-
-    this.weapons.forEach((w) => w.render(ctx));
   }
 
   update(zombies, ctx) {
