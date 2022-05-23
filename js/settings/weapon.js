@@ -10,6 +10,7 @@ const melee = {
   ...weapon,
   speed: 1.75,
   cooldown: 75,
+  damage: 7,
 };
 
 const ranged = {

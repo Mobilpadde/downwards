@@ -103,7 +103,7 @@ let map;
 const init = () => {
   if (!!raf) window.cancelAnimationFrame(raf);
   map = { ...sMap.map };
-  level = import.meta.env.DEV ? 10 : 0;
+  level = import.meta.env.DEV ? 0 : 0;
 
   if (player) player.destroy();
   player = new Player();

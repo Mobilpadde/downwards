@@ -80,6 +80,7 @@ export default class Creature extends Sprite {
     this.health.current -= dmg;
 
     if (this.health.current <= 0) {
+      this.health.current = 0;
       this.dead = true;
       Log(`${dealer} has killed "${this.name}"`, death.toggled);
       Events.emit("creature-dead", this.name);
