@@ -92,6 +92,7 @@ const init = () => {
 
   level = import.meta.env.DEV ? 10 : 0;
 
+  if (player) player.destroy();
   player = new Player();
   entities = new Array(~~(Math.random() * (level > 0 ? 3 : 1)) + 1)
     .fill(0)

@@ -43,31 +43,56 @@ export default class Player extends Creature {
     this.cooldown = 0;
     setInterval(() => this.cooldown--, 10);
 
-    window.addEventListener("keyup", ({ code }) => (this.keys[code] = false));
-    window.addEventListener("keydown", ({ code }) => (this.keys[code] = true));
+    window.addEventListener("keyup", this.keyUp.bind(this));
+    window.addEventListener("keydown", this.keyDown.bind(this));
 
-    let logged = false;
-    window.addEventListener("keyup", ({ code }) => {
-      if (code === "Space") {
-        Log(
-          `${this.name}: invisible "${this.keys.Space.toString()}"`,
-          playerInvisible.toggled
-        );
-        logged = false;
-      }
-    });
-
-    window.addEventListener("keydown", ({ code }) => {
-      if (code === "Space" && !logged) {
-        logged = true;
-        Log(
-          `${this.name}: invisible "${this.keys.Space.toString()}"`,
-          playerInvisible.toggled
-        );
-      }
-    });
+    this.logged = false;
+    window.addEventListener("keyup", this.invisibleOff.bind(this));
+    window.addEventListener("keydown", this.invisibleOn.bind(this));
 
     this.updateInterval = null;
+  }
+
+  keyUp({ code }) {
+    if (this.dead) return;
+    this.keys[code] = false;
+  }
+
+  keyDown({ code }) {
+    if (this.dead) return;
+    this.keys[code] = true;
+  }
+
+  invisibleOn({ code }) {
+    if (this.dead) return;
+
+    if (code === "Space" && !this.logged) {
+      this.logged = true;
+      Log(
+        `${this.name}: invisible "${this.keys.Space.toString()}"`,
+        playerInvisible.toggled
+      );
+    }
+  }
+
+  invisibleOff({ code }) {
+    if (this.dead) return;
+
+    if (code === "Space") {
+      this.logged = false;
+      Log(
+        `${this.name}: invisible "${this.keys.Space.toString()}"`,
+        playerInvisible.toggled
+      );
+    }
+  }
+
+  destroy() {
+    window.removeEventListener("keyup", this.keyUp.bind(this));
+    window.removeEventListener("keydown", this.keyDown.bind(this));
+
+    window.removeEventListener("keyup", this.invisibleOff.bind(this));
+    window.removeEventListener("keydown", this.invisibleOn.bind(this));
   }
 
   levelRegen() {
