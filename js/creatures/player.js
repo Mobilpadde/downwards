@@ -1,5 +1,6 @@
 import * as s from "../settings/settings";
 import { playerInvisible, weaponAdd, weaponRemove } from "../settings/filters";
+import { sInvisibility } from "../settings/invisibility";
 
 import Log from "../utils/logger";
 import Creature from "./creature";
@@ -46,10 +47,7 @@ export default class Player extends Creature {
     window.addEventListener("keyup", this.keyUp.bind(this));
     window.addEventListener("keydown", this.keyDown.bind(this));
 
-    this.logged = false;
-    window.addEventListener("keyup", this.invisibleOff.bind(this));
-    window.addEventListener("keydown", this.invisibleOn.bind(this));
-
+    this.invisibilityInterval = null;
     this.updateInterval = null;
   }
 
@@ -63,36 +61,25 @@ export default class Player extends Creature {
     this.keys[code] = true;
   }
 
-  invisibleOn({ code }) {
+  invisibility() {
     if (this.dead) return;
 
-    if (code === "Space" && !this.logged) {
-      this.logged = true;
-      Log(
-        `${this.name}: invisible "${this.keys.Space.toString()}"`,
-        playerInvisible.toggled
-      );
-    }
-  }
+    if (this.keys.Space && !this.invisible) {
+      Log(`${this.name} is invisible`, playerInvisible.toggled);
 
-  invisibleOff({ code }) {
-    if (this.dead) return;
-
-    if (code === "Space") {
-      this.logged = false;
-      Log(
-        `${this.name}: invisible "${this.keys.Space.toString()}"`,
-        playerInvisible.toggled
-      );
+      this.invisible = true;
+      this.invisibilityInterval = setTimeout(() => {
+        this.invisible = false;
+        this.takeDamage(sInvisibility.costs);
+        console.log(sInvisibility);
+        Log(`${this.name} is visible`, playerInvisible.toggled);
+      }, sInvisibility.time);
     }
   }
 
   destroy() {
     window.removeEventListener("keyup", this.keyUp.bind(this));
     window.removeEventListener("keydown", this.keyDown.bind(this));
-
-    window.removeEventListener("keyup", this.invisibleOff.bind(this));
-    window.removeEventListener("keydown", this.invisibleOn.bind(this));
   }
 
   levelRegen() {
@@ -134,9 +121,7 @@ export default class Player extends Creature {
   think() {
     if (this.dead) return;
 
-    this.invisible = this.keys.Space;
-
-    if (this.keys.Space) {
+    if (this.invisible) {
       this.color = "rgba(45, 45, 45, 0.5)";
     } else {
       this.color = "rgba(45, 45, 45, 1)";
@@ -201,6 +186,7 @@ export default class Player extends Creature {
   update(zombies, ctx) {
     if (!this.dead) {
       this.attack(zombies);
+      this.invisibility();
       this.think();
       this.move();
 
