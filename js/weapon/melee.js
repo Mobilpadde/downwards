@@ -1,10 +1,10 @@
-import * as s from "../settings/settings";
+import * as sWeapon from "../settings/weapon";
 import Weapon from "./weapon";
 
 export default class Melee extends Weapon {
   constructor(o) {
     super({
-      ...s.weapons.melee,
+      ...sWeapon.weapons.melee,
       ...o,
     });
   }
@@ -24,7 +24,7 @@ export default class Melee extends Weapon {
 
     if (this.cooldown > 0) return false;
     if (o) {
-      this.cooldown = s.weapons.melee.cooldown;
+      this.cooldown = sWeapon.weapons.melee.cooldown;
       o.takeDamage(this.damage, this.name);
 
       return o;

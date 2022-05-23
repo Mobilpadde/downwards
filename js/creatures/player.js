@@ -1,4 +1,4 @@
-import * as s from "../settings/settings";
+import * as sCreature from "../settings/creature";
 import { playerInvisible, weaponAdd, weaponRemove } from "../settings/filters";
 import { sInvisibility } from "../settings/invisibility";
 
@@ -9,10 +9,10 @@ import Fist from "../weapon/fist";
 export default class Player extends Creature {
   constructor() {
     super({
-      health: s.player.health,
-      damage: s.player.damage,
-      size: s.player.size,
-      vision: s.player.vision,
+      health: sCreature.player.health,
+      damage: sCreature.player.damage,
+      size: sCreature.player.size,
+      vision: sCreature.player.vision,
       color: "rgba(45, 45, 45, 1)",
       id: "p",
       // sheet: "/static/person.png"
@@ -40,7 +40,7 @@ export default class Player extends Creature {
       Space: false,
     };
 
-    this.range = s.creature.range;
+    this.range = sCreature.creature.range;
     this.cooldown = 0;
     setInterval(() => this.cooldown--, 10);
 
@@ -82,7 +82,7 @@ export default class Player extends Creature {
   }
 
   levelRegen() {
-    this.health.current += s.player.levelRegen;
+    this.health.current += sCreature.player.levelRegen;
 
     if (this.health.current > this.health.max)
       this.health.current = this.health.max;
@@ -94,7 +94,7 @@ export default class Player extends Creature {
   }
 
   addWeapon() {
-    if (this.weapons.length >= s.player.weapons) {
+    if (this.weapons.length >= sCreature.player.weapons) {
       Log(
         `"${this.weapons[0].name}" was removed from you`,
         weaponRemove.toggled

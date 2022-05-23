@@ -1,5 +1,6 @@
-import * as s from "../settings/settings";
+import * as sAttack from "../settings/attack";
 import * as sMap from "../settings/map";
+import * as sCreature from "../settings/creature";
 import { attackZombie } from "../settings/filters";
 
 import Log from "../utils/logger";
@@ -9,15 +10,15 @@ import Creature from "./creature";
 export default class Zombie extends Creature {
   constructor() {
     super({
-      health: s.creature.health,
-      damage: s.creature.damage,
-      size: s.creature.size,
-      vision: s.creature.vision,
+      health: sCreature.creature.health,
+      damage: sCreature.creature.damage,
+      size: sCreature.creature.size,
+      vision: sCreature.creature.vision,
       color: "teal",
       id: "z",
     });
 
-    this.range = s.creature.range;
+    this.range = sCreature.creature.range;
     this.speed = 0.25 + Math.random() * 0.55;
     this.move = new Vec(this.speed, 0);
     this.cooldown = 0;
@@ -40,10 +41,12 @@ export default class Zombie extends Creature {
       p.pos.distSq(this.pos) < this.range * this.range + this.size * p.size
     ) {
       Log(
-        `${this.name} ${s.attack.adverb()} ${s.attack.noun()} "${p.name}"`,
+        `${this.name} ${sAttack.attack.adverb()} ${sAttack.attack.noun()} "${
+          p.name
+        }"`,
         attackZombie.toggled
       );
-      this.cooldown = s.creature.cooldown;
+      this.cooldown = sCreature.creature.cooldown;
       p.takeDamage(this.damage, this.name);
     }
   }

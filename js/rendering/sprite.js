@@ -1,5 +1,6 @@
-import * as s from "../settings/settings";
 import * as sMap from "../settings/map";
+import * as sCreature from "../settings/creature";
+
 import Vec from "../utils/vec";
 
 export default class Sprite {
@@ -28,7 +29,7 @@ export default class Sprite {
     img.src = "/static/person.png";
     img.onload = () => {
       this.image = img;
-      this.sheetSize = img.naturalWidth / s.creature.sprite.size;
+      this.sheetSize = img.naturalWidth / sCreature.creature.sprite.size;
     };
   }
 
@@ -42,14 +43,14 @@ export default class Sprite {
 
     ctx.drawImage(
       this.image,
-      s.creature.sprite.size * this.sheetIdx,
+      sCreature.creature.sprite.size * this.sheetIdx,
       0,
-      s.creature.sprite.size,
-      s.creature.sprite.size,
-      this.pos.x - s.creature.sprite.resize / 2,
-      this.pos.y - s.creature.sprite.resize / 2,
-      s.creature.sprite.resize,
-      s.creature.sprite.resize
+      sCreature.creature.sprite.size,
+      sCreature.creature.sprite.size,
+      this.pos.x - sCreature.creature.sprite.resize / 2,
+      this.pos.y - sCreature.creature.sprite.resize / 2,
+      sCreature.creature.sprite.resize,
+      sCreature.creature.sprite.resize
     );
   }
 }
