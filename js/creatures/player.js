@@ -65,6 +65,7 @@ export default class Player extends Creature {
 
   addWeapon() {
     if (this.weapons.length >= s.player.weapons) {
+      Log(`"${this.weapons[0].name}" was removed from you`);
       this.weapons.shift();
     }
 
@@ -72,6 +73,7 @@ export default class Player extends Creature {
       new Fist({ pos: this.pos, size: this.size, idx: this.weapons.length })
     );
     this.weapons.forEach((w, i) => w.updatePos(i));
+    Log(`"${this.weapons[this.weapons.length - 1].name}" was added to you`);
   }
 
   attack(others) {
