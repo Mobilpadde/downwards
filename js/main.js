@@ -103,10 +103,13 @@ let map;
 const init = () => {
   if (!!raf) window.cancelAnimationFrame(raf);
   map = { ...sMap.map };
-  level = import.meta.env.DEV ? 0 : 0;
+  level = import.meta.env.DEV ? 10 : 0;
 
   if (player) player.destroy();
   player = new Player();
+
+  if (import.meta.env.DEV) new Array(4).fill(0).map(() => player.addWeapon());
+
   entities = new Array(~~(Math.random() * (level > 0 ? 3 : 1)) + 1)
     .fill(0)
     .map((_, i) => new Ladder(1 - i));
