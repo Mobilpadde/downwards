@@ -2,7 +2,7 @@ const weapon = {
   size: 8,
   range: 64,
   speed: 1.25,
-  cooldown: 100,
+  cooldown: 85,
   damage: 5,
 };
 
