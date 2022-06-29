@@ -17,7 +17,7 @@ import Ladder from "./entities/ladder";
   "Space to turn invisible",
   "- costs 3hp for 500ms",
   "Attacks are automatic",
-  "",
+  "-".repeat(58),
 ].forEach((t) => Log(t, true));
 makeFilters();
 
@@ -75,6 +75,7 @@ const render = (time) => {
 
       player.addWeapon();
       player.levelRegen();
+      Log("-".repeat(58), true);
       Log(`${player.name} entered Lv. ${level}`, levelChange.toggled);
     });
 
@@ -126,6 +127,7 @@ window.addEventListener("load", init);
 Events.on(`creature-dead`, (name) => {
   if (name === player.name) {
     Events.emit(`${player.name}-dead`);
+    Log("-".repeat(58), true);
     return;
   }
 });
