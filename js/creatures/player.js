@@ -87,12 +87,15 @@ export default class Player extends Creature {
 
   levelRegen() {
     this.health.current += sCreature.player.levelRegen;
+    let added = ` (added ${sCreature.player.levelRegen})`;
 
-    if (this.health.current > this.health.max)
+    if (this.health.current > this.health.max) {
       this.health.current = this.health.max;
+      added = "";
+    }
 
     Log(
-      `${this.name} has ${this.health.current} health`,
+      `${this.name} has ${this.health.current}${added} health`,
       playerInvisible.toggled
     );
   }
