@@ -25,6 +25,9 @@ const mainRenderer = new Renderer(sMap.map.size);
 const bgRenderer = new Renderer(sMap.map.size);
 
 document.getElementById("c").prepend(mainRenderer.canvas);
+document.getElementById(
+  "sidebar"
+).style.maxHeight = `${mainRenderer.canvas.height}px`;
 
 const render = (time) => {
   bgRenderer.ctx.fillStyle = sMap.map.biome[map.currentBiome];

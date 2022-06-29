@@ -30,7 +30,6 @@ canvas {
 
 #sidebar {
   width: 300px;
-  max-height: 640px;
   display: flex;
   flex-direction: column;
 }
