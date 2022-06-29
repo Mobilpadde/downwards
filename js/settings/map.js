@@ -20,4 +20,8 @@ const entity = {
   },
 };
 
-export { map, entity };
+let biome = map.currentBiome;
+let getBiome = () => biome;
+let setBiome = (b) => (biome = b);
+
+export { map, entity, getBiome, setBiome };

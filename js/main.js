@@ -72,6 +72,7 @@ const render = (time) => {
 
       const n = Object.keys(sMap.map.biome);
       map.currentBiome = n[~~(Math.random() * n.length)];
+      sMap.setBiome(map.currentBiome);
 
       player.addWeapon();
       player.levelRegen();
