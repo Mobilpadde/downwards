@@ -1,4 +1,4 @@
-let last = new Date();
+let last = 0;
 
 export default function FPS(now) {
   const fps = 1000 / (now - last);

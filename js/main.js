@@ -30,6 +30,8 @@ document.getElementById(
 ).style.maxHeight = `${mainRenderer.canvas.height}px`;
 
 const render = (time) => {
+  window.cancelAnimationFrame(raf);
+
   bgRenderer.ctx.fillStyle = sMap.map.biome[map.currentBiome];
   bgRenderer.ctx.fillRect(0, 0, sMap.map.size, sMap.map.size);
 
@@ -106,7 +108,6 @@ let raf;
 let map;
 
 const init = () => {
-  if (!!raf) window.cancelAnimationFrame(raf);
   map = { ...sMap.map };
   level = import.meta.env.DEV ? 10 : 0;
 
