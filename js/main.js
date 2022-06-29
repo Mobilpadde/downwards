@@ -18,7 +18,7 @@ import Ladder from "./entities/ladder";
   "- costs 3hp for 500ms",
   "Attacks are automatic",
   "",
-].forEach((t) => Log(t, true));
+].forEach((t) => Log(t, () => true));
 makeFilters();
 
 const mainRenderer = new Renderer(sMap.map.size);
@@ -76,10 +76,17 @@ const render = (time) => {
       map.currentBiome = n[~~(Math.random() * n.length)];
       sMap.setBiome(map.currentBiome);
 
-      Log("", true);
+      Log("", () => true);
       player.levelRegen();
       player.addWeapon();
       Log(`${player.name} entered Lv. ${level}`, levelChange.toggled);
+
+      const pure = document.getElementsByTagName("select-pure")[0];
+      pure &&
+        pure.setAttribute(
+          "style",
+          `--selected-background-color: ${map.biome[map.currentBiome]};`
+        );
     });
 
     e.render(mainRenderer.ctx);
@@ -111,6 +118,13 @@ const init = () => {
   map = { ...sMap.map };
   level = import.meta.env.DEV ? 10 : 0;
 
+  const pure = document.getElementsByTagName("select-pure")[0];
+  pure &&
+    pure.setAttribute(
+      "style",
+      `--selected-background-color: ${map.biome[map.currentBiome]};`
+    );
+
   if (player) player.destroy();
   player = new Player();
 
@@ -129,7 +143,7 @@ window.addEventListener("load", init);
 Events.on(`creature-dead`, (name) => {
   if (name === player.name) {
     Events.emit(`${player.name}-dead`);
-    Log("", true);
+    Log("", () => true);
     return;
   }
 });

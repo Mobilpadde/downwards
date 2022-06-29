@@ -5,19 +5,19 @@ import clock from "./clock";
 const c = document.getElementById("console");
 
 export default (text, toggled, time = clock()) => {
-  if (!toggled) return;
+  if (!toggled()) return;
+
+  const biome = map.biome[getBiome()];
 
   const line = document.createElement("li");
-  line.innerHTML = `<span style="background: ${
-    map.biome[getBiome()]
-  };">[ ${time} ]</span> ${text}`;
+  line.innerHTML = `<span style="background: ${biome};">[ ${time} ]</span> ${text}`;
 
   c.appendChild(line);
   c.scrollTop = c.scrollHeight + 16;
 
   console.log(
     "%c%s%c %s",
-    `color:white; background:${map.biome[getBiome()]};`,
+    `color:white; background:${biome};`,
     `[ ${time} ]`,
     "color:inherit; background:inherit;",
     text
