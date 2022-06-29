@@ -17,7 +17,7 @@ import Ladder from "./entities/ladder";
   "Space to turn invisible",
   "- costs 3hp for 500ms",
   "Attacks are automatic",
-  "-".repeat(58),
+  "",
 ].forEach((t) => Log(t, true));
 makeFilters();
 
@@ -76,9 +76,9 @@ const render = (time) => {
       map.currentBiome = n[~~(Math.random() * n.length)];
       sMap.setBiome(map.currentBiome);
 
-      player.addWeapon();
+      Log("", true);
       player.levelRegen();
-      Log("-".repeat(58), true);
+      player.addWeapon();
       Log(`${player.name} entered Lv. ${level}`, levelChange.toggled);
     });
 
@@ -129,7 +129,7 @@ window.addEventListener("load", init);
 Events.on(`creature-dead`, (name) => {
   if (name === player.name) {
     Events.emit(`${player.name}-dead`);
-    Log("-".repeat(58), true);
+    Log("", true);
     return;
   }
 });
