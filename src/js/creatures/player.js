@@ -1,6 +1,6 @@
 import * as sCreature from "../settings/creature";
 import { playerInvisible, weaponAdd, weaponRemove } from "../settings/filters";
-import { sInvisibility } from "../settings/invisibility";
+import { invisibility as sInvisibility } from "../settings/invisibility";
 
 import Log from "../utils/logger";
 import Creature from "./creature";
