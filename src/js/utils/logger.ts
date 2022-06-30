@@ -4,7 +4,7 @@ import clock from "./clock";
 
 const c = document.getElementById("console");
 
-export default (text, toggled, time = clock()) => {
+export default (text: string, toggled: () => boolean, time = clock()) => {
   if (!toggled()) return;
 
   const biome = map.biome[getBiome()];
@@ -12,8 +12,10 @@ export default (text, toggled, time = clock()) => {
   const line = document.createElement("li");
   line.innerHTML = `<span style="background: ${biome};">[ ${time} ]</span> ${text}`;
 
-  c.appendChild(line);
-  c.scrollTop = c.scrollHeight + 16;
+  if (c) {
+    c.appendChild(line);
+    c.scrollTop = c.scrollHeight + 16;
+  }
 
   console.log(
     "%c%s%c %s",
