@@ -1,7 +1,11 @@
-const events = {};
+type Callback = (data: string | null) => void;
+
+type EventsType<K extends string> = { [k in K]: Array<Callback> };
+
+const events: EventsType<string> = {};
 
 export default class Events {
-  static on(name, fn) {
+  static on(name: string, fn: Callback) {
     if (!events[name]) {
       events[name] = [];
     }
@@ -9,7 +13,7 @@ export default class Events {
     events[name].push(fn);
   }
 
-  static remove(name, fn) {
+  static remove(name: string, fn: Callback) {
     if (!events[name]) {
       return;
     }
@@ -17,7 +21,7 @@ export default class Events {
     events[name] = events[name].filter((listener) => listener !== fn);
   }
 
-  static emit(name, data) {
+  static emit(name: string, data: string | null) {
     if (!events[name]) {
       return;
     }
