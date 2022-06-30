@@ -1,5 +1,5 @@
 import Melee from "./melee";
-import { attack as sAttack } from "../settings/attack";
+import * as sAttack from "../settings/attack";
 import * as sWeapon from "../settings/weapon";
 import { attackSword } from "../settings/filters";
 import Log from "../utils/logger";

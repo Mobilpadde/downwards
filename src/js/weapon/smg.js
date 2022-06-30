@@ -1,5 +1,5 @@
 import Ranged from "./ranged";
-import { attack as sAttack } from "../settings/attack";
+import * as sAttack from "../settings/attack";
 import * as sWeapon from "../settings/weapon";
 import { attackSmg } from "../settings/filters";
 import Log from "../utils/logger";

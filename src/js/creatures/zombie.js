@@ -1,4 +1,4 @@
-import { attack as aAttack } from "../settings/attack";
+import * as sAttack from "../settings/attack";
 import * as sMap from "../settings/map";
 import * as sCreature from "../settings/creature";
 import { attackZombie } from "../settings/filters";

@@ -1,4 +1,4 @@
-const nouns = [
+const nouns: string[] = [
   "attacked",
   "slashed",
   "charged",
@@ -10,7 +10,7 @@ const nouns = [
   "berated",
 ];
 
-const adverbs = [
+const adverbs: string[] = [
   "boldly",
   "actually",
   "physically",
@@ -25,9 +25,7 @@ const adverbs = [
   "proudly",
 ];
 
-const attack = {
-  noun: () => nouns[~~(Math.random() * nouns.length)],
-  adverb: () => adverbs[~~(Math.random() * adverbs.length)],
-};
+const noun = (): string => nouns[~~(Math.random() * nouns.length)];
+const adverb = (): string => adverbs[~~(Math.random() * adverbs.length)];
 
-export { attack };
+export { noun, adverb };
