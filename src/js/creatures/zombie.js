@@ -1,4 +1,4 @@
-import * as sAttack from "../settings/attack";
+import { attack as aAttack } from "../settings/attack";
 import * as sMap from "../settings/map";
 import * as sCreature from "../settings/creature";
 import { attackZombie } from "../settings/filters";
@@ -41,9 +41,7 @@ export default class Zombie extends Creature {
       p.pos.distSq(this.pos) < this.range * this.range + this.size * p.size
     ) {
       Log(
-        `${this.name} ${sAttack.attack.adverb()} ${sAttack.attack.noun()} "${
-          p.name
-        }"`,
+        `${this.name} ${sAttack.adverb()} ${sAttack.noun()} "${p.name}"`,
         attackZombie.toggled
       );
       this.cooldown = sCreature.creature.cooldown;
