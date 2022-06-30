@@ -1,12 +1,15 @@
 export default class Vec {
-  static random(xm, xn, ym, yn) {
+  static random(xm: number, xn: number, ym: number, yn: number) {
     const x = Math.random() * (xn - xm) + xm;
     const y = Math.random() * (yn - ym) + ym;
 
     return new Vec(x, y);
   }
 
-  constructor(x, y) {
+  x: number;
+  y: number;
+
+  constructor(x: number, y: number) {
     this.x = x;
     this.y = y;
   }
@@ -19,48 +22,48 @@ export default class Vec {
     return new Vec(this.x, this.y);
   }
 
-  dist(v) {
+  dist(v: Vec) {
     return Math.sqrt(this.distSq(v));
   }
 
-  distSq(v) {
+  distSq(v: Vec) {
     const dx = this.x - v.x;
     const dy = this.y - v.y;
 
     return dx * dx + dy * dy;
   }
 
-  add(x, y) {
+  add(x: number, y: number) {
     this.x += x;
     this.y += y;
 
     return this;
   }
 
-  addX(x) {
+  addX(x: number) {
     this.x += x;
   }
 
-  addY(y) {
+  addY(y: number) {
     this.y += y;
   }
 
-  addScalar(x) {
+  addScalar(x: number) {
     return this.add(x, x);
   }
 
-  sub(x, y) {
+  sub(x: number, y: number) {
     this.x -= x;
     this.y -= y;
 
     return this;
   }
 
-  subScalar(x) {
+  subScalar(x: number) {
     return this.sub(x, x);
   }
 
-  randomizeY(x, y) {
+  randomizeY(x: number, y: number) {
     const v = Vec.random(x, y, 0, 0);
     this.y = v.x;
   }
