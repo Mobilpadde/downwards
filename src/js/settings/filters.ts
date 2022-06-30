@@ -1,6 +1,6 @@
 import "select-pure";
 
-export default () => {
+export default (): void => {
   const holder = document.getElementById("filters");
 
   const select = document.createElement("select-pure");
@@ -31,11 +31,12 @@ export default () => {
     const tag = "downwards:" + t.tag;
 
     if (!localStorage.getItem(tag)) {
-      localStorage.setItem(tag, true);
+      localStorage.setItem(tag, "true");
     }
 
-    const option = document.createElement("option-pure");
-
+    const option: HTMLOptionElement = document.createElement(
+      "option-pure"
+    ) as HTMLOptionElement;
     option.innerText = t.text;
     option.value = tag;
     option.setAttribute("value", tag);
@@ -44,12 +45,12 @@ export default () => {
     select.appendChild(option);
   });
 
-  select.addEventListener("change", ({ target: { values } }) => {
-    filters.forEach((f) => localStorage.setItem("downwards:" + f.tag, false));
-    values.forEach((tag) => localStorage.setItem(tag, true));
+  select.addEventListener("change", ({ target: { values } }: any) => {
+    filters.forEach((f) => localStorage.setItem("downwards:" + f.tag, "false"));
+    values.forEach((tag: string) => localStorage.setItem(tag, "true"));
   });
 
-  holder.appendChild(select);
+  if (holder) holder.appendChild(select);
 };
 
 export {
@@ -66,67 +67,73 @@ export {
   weaponRemove,
 };
 
-const death = {
+type Filter = {
+  tag: string;
+  text: string;
+  toggled: () => boolean;
+};
+
+const death: Filter = {
   tag: "death",
   text: "Death",
   toggled: () => localStorage.getItem("downwards:death") == "true",
 };
 
-const attackZombie = {
+const attackZombie: Filter = {
   tag: "attackZombie",
   text: "Attack: Zombie",
   toggled: () => localStorage.getItem("downwards:attackZombie") == "true",
 };
 
-const attackFist = {
+const attackFist: Filter = {
   tag: "attackFist",
   text: "Attack: Fist",
   toggled: () => localStorage.getItem("downwards:attackFist") == "true",
 };
 
-const attackSword = {
+const attackSword: Filter = {
   tag: "attackSword",
   text: "Attack: Sword",
   toggled: () => localStorage.getItem("downwards:attackSword") == "true",
 };
 
-const attackPistol = {
+const attackPistol: Filter = {
   tag: "attackPistol",
   text: "Attack: Pistol",
   toggled: () => localStorage.getItem("downwards:attackPistol") == "true",
 };
 
-const attackSmg = {
+const attackSmg: Filter = {
   tag: "attackSmg",
   text: "Attack: Smg",
   toggled: () => localStorage.getItem("downwards:attackSmg") == "true",
 };
 
-const levelChange = {
+const levelChange: Filter = {
   tag: "levelChange",
   text: "Level change",
   toggled: () => localStorage.getItem("downwards:levelChange") == "true",
 };
 
-const levelChangeRegen = {
+const levelChangeRegen: Filter = {
   tag: "levelChangeRegen",
   text: "Regen",
   toggled: () => localStorage.getItem("downwards:levelChangeRegen") == "true",
 };
 
-const playerInvisible = {
+const playerInvisible: Filter = {
   tag: "playerInvisible",
   text: "Invisibility",
   toggled: () => localStorage.getItem("downwards:playerInvisible") == "true",
 };
 
-const weaponAdd = {
+const weaponAdd: Filter = {
   tag: "weaponAdd",
   text: "Weapon: Add",
   toggled: () => localStorage.getItem("downwards:weaponAdd") == "true",
 };
 
-const weaponRemove = {
+const weaponRemove: Filter = {
   tag: "weaponRemove",
   text: "Weapon: Remove",
   toggled: () => localStorage.getItem("downwards:weaponRemove") == "true",
