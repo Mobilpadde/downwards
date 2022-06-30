@@ -118,6 +118,7 @@ const init = () => {
   map = { ...sMap.map };
   level = import.meta.env.DEV ? 10 : 0;
 
+  sMap.setBiome(map.currentBiome);
   const pure = document.getElementsByTagName("select-pure")[0];
   pure &&
     pure.setAttribute(
