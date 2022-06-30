@@ -67,11 +67,11 @@ export {
   weaponRemove,
 };
 
-type Filter = {
+interface Filter {
   tag: string;
   text: string;
   toggled: () => boolean;
-};
+}
 
 const death: Filter = {
   tag: "death",

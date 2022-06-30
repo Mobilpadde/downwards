@@ -1,9 +1,9 @@
-type Sprite = {
+interface Sprite {
   size: number;
   resize: number;
-};
+}
 
-type Creature = {
+interface Creature {
   size: number;
   vision: number;
   range: number;
@@ -13,7 +13,7 @@ type Creature = {
   cooldown: number;
 
   sprite: Sprite;
-};
+}
 
 const creature: Creature = {
   size: 8,
@@ -30,11 +30,11 @@ const creature: Creature = {
   },
 };
 
-type Player = Creature & {
+interface Player extends Creature {
   health: number;
   weapons: number;
   levelRegen: number;
-};
+}
 
 const player: Player = {
   ...creature,

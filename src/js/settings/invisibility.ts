@@ -1,7 +1,7 @@
-type Invisibility = {
+interface Invisibility {
   costs: number;
   time: number;
-};
+}
 
 const invisibility: Invisibility = {
   costs: 3,

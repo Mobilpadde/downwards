@@ -4,24 +4,24 @@ enum Biomes {
   Stone = "stone",
 }
 
-type Biome = {
+interface Biome {
   [Biomes.Grass]: string;
   [Biomes.Ground]: string;
   [Biomes.Stone]: string;
-};
+}
 
-type Dither = {
+interface Dither {
   size: number;
   minSize: number;
-};
+}
 
-type Map = {
+interface Map {
   size: number;
   dither: Dither;
 
   biome: Biome;
   currentBiome: Biomes;
-};
+}
 
 const map: Map = {
   size: 640,
@@ -38,14 +38,14 @@ const map: Map = {
   currentBiome: Biomes.Grass,
 };
 
-type Entities = {
+interface Entities {
   width: number;
   height: number;
-};
+}
 
-type Entiity = {
+interface Entiity {
   "1x1": Entities;
-};
+}
 
 const entity: Entiity = {
   "1x1": {

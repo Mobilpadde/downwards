@@ -1,10 +1,10 @@
-type Weapon = {
+interface Weapon {
   size: number;
   range: number;
   speed: number;
   cooldown: number;
   damage: number;
-};
+}
 
 const weapon: Weapon = {
   size: 8,
