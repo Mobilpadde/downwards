@@ -15,12 +15,6 @@ type Creature = {
   sprite: Sprite;
 };
 
-type Player = Creature & {
-  health: number;
-  weapons: number;
-  levelRegen: number;
-};
-
 const creature: Creature = {
   size: 8,
   vision: 72,
@@ -34,6 +28,12 @@ const creature: Creature = {
     size: 32,
     resize: 24,
   },
+};
+
+type Player = Creature & {
+  health: number;
+  weapons: number;
+  levelRegen: number;
 };
 
 const player: Player = {
